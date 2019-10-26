@@ -9,7 +9,12 @@ class Section extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('tapped');
+        switch (name) {
+          case 'Today':
+            Navigator.pushNamed(context, '/todayTab');
+            break;
+          default:
+        }
       },
       child: Container(
         margin:
