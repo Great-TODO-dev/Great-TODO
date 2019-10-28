@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            print("Hi");
             Navigator.pushNamed(context, "/todayTab");
           },
           child: Icon(
