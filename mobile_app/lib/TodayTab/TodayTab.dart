@@ -5,6 +5,8 @@ import '../Locals/locals.dart';
 import '../Task/Task.dart';
 
 class TodayTab extends StatelessWidget {
+  dynamic tasks;
+  TodayTab(this.tasks);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,9 @@ class TodayTab extends StatelessWidget {
         ),
       body: ListView(
         children: [
-          Task('Kill all bastards')
+          ...(tasks as List<dynamic>).map((task) {
+            return Task(task['name'], task['completed']);
+          }).toList()
         ],
       ),
     );

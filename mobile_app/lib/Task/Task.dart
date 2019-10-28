@@ -3,19 +3,20 @@ import 'package:flutter/widgets.dart';
 
 class Task extends StatefulWidget {
   final String name;
-  Task(this.name);
+  bool state;
+  Task(this.name, this.state);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: переделать передачу назвния таска
-    return _TaskState(name);
+    return _TaskState(name, state);
   }
 }
 
 class _TaskState extends State<Task> {
   final String name;
-  bool checkboxState = false;
-  _TaskState(this.name);
+  bool checkboxState;
+  _TaskState(this.name, this.checkboxState);
 
   @override
   Widget build(BuildContext context) {
