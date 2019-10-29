@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './InboxSection.dart';
 import './section.dart';
 import '../Locals/locals.dart';
 
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
         ),
         body: ListView(
           children: [
+            InboxSection(Locals.inbox, 4),
             Section(Locals.today, '3'),
             Section(Locals.upComing),
             Section(Locals.anyTime),
@@ -40,6 +42,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// var deviceSize = MediaQuery.of(context).size;
 
 class DarkLine extends CustomPainter {
   @override
