@@ -10,35 +10,57 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, "/todayTab");
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            size: 30,
-            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, "/todayTab");
+        },
+        backgroundColor: Colors.blue,
+        child: Icon(
+          Icons.add,
+          size: 40,
+          color: Colors.white,
         ),
-        appBar: AppBar(
-          title: Text(NAME),
-        ),
-        body: ListView(
-          children: [
-            InboxSection(Locals.inbox, 4),
-            Section(Locals.today, '3'),
-            Section(Locals.upComing),
-            Section(Locals.anyTime),
-            Section(Locals.someTime),
-            Container(
-              margin: EdgeInsets.only(top: 40.0),
-              padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: CustomPaint(
-                painter: DarkLine(),
+      ),
+      appBar: AppBar(
+        title: Text(NAME),
+      ),
+      body: ListView(
+        children: [
+          InboxSection(Locals.inbox, 4),
+          Section(
+              Locals.today,
+              Icon(
+                Icons.star,
+                color: Colors.yellow,
+                size: 30,
               ),
-            )
-          ],
-        ),
-      );
+              '3'),
+          Section(Locals.upComing,
+              Icon(Icons.today, color: Colors.purple, size: 30)),
+          Section(
+              Locals.anyTime,
+              Icon(
+                Icons.calendar_today,
+                color: Colors.lightGreen,
+                size: 30,
+              )),
+          Section(
+              Locals.someTime,
+              Icon(
+                Icons.indeterminate_check_box,
+                color: Colors.brown,
+                size: 30,
+              )),
+          Container(
+            margin: EdgeInsets.only(top: 40.0),
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+            child: CustomPaint(
+              painter: DarkLine(),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

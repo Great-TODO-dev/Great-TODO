@@ -31,8 +31,8 @@ class _InboxSectionState extends State<InboxSection> {
               child: Row(
                 children: [
                   Icon(
-                    Icons.functions,
-                    color: Colors.black87,
+                    Icons.inbox,
+                    color: Colors.blue,
                     size: 30,
                   ),
                   Container(

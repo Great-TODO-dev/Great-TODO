@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class Section extends StatelessWidget {
   final String name;
   final String count;
-  Section(this.name, [this.count = '']);
+  final Icon _icon;
+  Section(this.name, this._icon, [this.count = '']);
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,7 @@ class Section extends StatelessWidget {
             Expanded(
                 child: Row(
               children: [
-                Icon(
-                  Icons.functions,
-                  color: Colors.black87,
-                  size: 30,
-                ),
+                _icon,
                 Container(
                   margin: EdgeInsets.only(left: 10.0),
                   child: Text(
@@ -48,8 +45,3 @@ class Section extends StatelessWidget {
     );
   }
 }
-
-// Код для Списка конкретных задач - 4.39.13 / 5.44.31
-// ...(tasks as List<String>).map((task) {
-//    return Task(task)
-// }).toList();

@@ -7,7 +7,10 @@ void main() {
   MainStore mainStore = MainStore();
   runApp(MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.black
+        brightness: Brightness.dark,
+        primaryColor: Colors.black,
+        fontFamily: 'Montserrat',
+        appBarTheme: AppBarTheme(elevation: 0)
       ),
       initialRoute: '/',
       routes: {

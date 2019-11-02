@@ -8,7 +8,6 @@ class Task extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: переделать передачу назвния таска
     return _TaskState(name, state);
   }
 }
