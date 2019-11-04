@@ -13,16 +13,18 @@ class TodayTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(Locals.today),
+        elevation: 10,
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+            icon: Icon(Icons.star_half),
+          );
+        }),
       ),
       body: ListView(
         children: [
           TodayTitle(),
           ...(tasks as List<dynamic>).map((task) {
-            return Draggable(
-              child: Task(task['name'], task['completed']),
-              feedback: Container(),
-              childWhenDragging: Task(task['name'], task['completed'])
-            );
+            return Task(task['name'], task['completed']);
           }).toList()
         ],
       ),

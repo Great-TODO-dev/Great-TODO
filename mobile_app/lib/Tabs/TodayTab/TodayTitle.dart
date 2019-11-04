@@ -17,8 +17,8 @@ class TodayTitle extends StatelessWidget {
                 child: Row(
               children: [
                 Icon(
-                  Icons.inbox,
-                  color: Colors.blue,
+                  Icons.star,
+                  color: Colors.yellow,
                   size: 30,
                 ),
                 Container(

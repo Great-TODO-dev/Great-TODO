@@ -6,11 +6,13 @@ class MainStore {
     var tasks = [
       {
         'name' : 'Kill all bastards',
-        'completed' : true
+        'completed' : true,
+        'description' : 'finally'
       },
       {
         'name' : 'Kill all god damn fools',
-        'completed' : false
+        'completed' : false,
+        'description' : 'of course i hate them'
       },
       {
         'name' : 'Find a gun',

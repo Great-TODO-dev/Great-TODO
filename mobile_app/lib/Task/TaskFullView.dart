@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import './TaskFullView.dart';
+class TaskFullView extends StatefulWidget {
+  String name;
+  TaskFullView(this.name);
 
-class Task extends StatefulWidget {
-  final String name;
-  bool state;
-  Task(this.name, this.state);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _TaskState(name, state);
-  }
+  _TaskFullViewState createState() => _TaskFullViewState(name);
 }
 
-class _TaskState extends State<Task> {
+class _TaskFullViewState extends State<TaskFullView> {
   final String name;
-  bool checkboxState;
-  _TaskState(this.name, this.checkboxState);
+  bool checkboxState = true;
+  _TaskFullViewState(this.name);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(right: 15),
-      child: Row(
-        children: [
-          Expanded(
-            child: Hero(
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            Hero(
               tag: 'task',
               child: Row(
               children: [
@@ -54,9 +46,8 @@ class _TaskState extends State<Task> {
               ],
             ),
             )
-          ),
-          Icon(Icons.all_inclusive)
-        ],
+          ],
+        ),
       ),
     );
   }
