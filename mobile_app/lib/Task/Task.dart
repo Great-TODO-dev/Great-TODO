@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 import './TaskFullView.dart';
@@ -21,42 +22,40 @@ class _TaskState extends State<Task> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(right: 15),
-      child: Row(
-        children: [
-          Expanded(
-            child: Hero(
-              tag: 'task',
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => new TaskFullView(name)));
+      },
+      child: Container(
+        padding: EdgeInsets.only(right: 15),
+        child: Row(
+          children: [
+            Expanded(
               child: Row(
-              children: [
-                Checkbox(
-                  value: checkboxState,
-                  onChanged: (stateBool) {
-                    setState(() {
-                      checkboxState = !checkboxState;
-                    });
-                  },
-                  activeColor: Colors.blue,
-                  checkColor: Colors.white,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, new MaterialPageRoute(
-                      builder: (BuildContext context) => new TaskFullView(name)
-                    ));
-                  },
-                  child: Text(
-                    name,
-                    style: TextStyle(fontSize: 30),
+                children: [
+                  CupertinoSwitch(
+                    value: checkboxState,
+                    onChanged: (stateBool) {
+                      setState(() {
+                        checkboxState = !checkboxState;
+                      });
+                    },
+                    activeColor: Colors.blue,
                   ),
-                )
-              ],
+                  Text(
+                      name,
+                      style: TextStyle(fontSize: 30),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                ],
+              ),
             ),
-            )
-          ),
-          Icon(Icons.all_inclusive)
-        ],
+            Icon(Icons.all_inclusive)
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import './InboxSection.dart';
 import './section.dart';
@@ -9,22 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, "/todayTab");
-        },
-        backgroundColor: Colors.blue,
-        child: Icon(
-          Icons.add,
-          size: 40,
-          color: Colors.white,
-        ),
-      ),
-      appBar: AppBar(
-        title: Text(NAME),
-      ),
-      body: ListView(
+    return CupertinoPageScaffold(
+      backgroundColor: Colors.black,
+      child: ListView(
         children: [
           InboxSection(Locals.inbox, 4),
           Section(
