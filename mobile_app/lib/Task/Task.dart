@@ -22,8 +22,8 @@ class _TaskState extends State<Task> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return FlatButton(
+      onPressed: () {
         Navigator.push(
             context,
             new MaterialPageRoute(
@@ -46,14 +46,14 @@ class _TaskState extends State<Task> {
                     activeColor: Colors.blue,
                   ),
                   Text(
-                      name,
-                      style: TextStyle(fontSize: 30),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    name,
+                    style: TextStyle(fontSize: 30, color: Colors.white),
+                    overflow: TextOverflow.clip,
+                  ),
                 ],
               ),
             ),
-            Icon(Icons.all_inclusive)
+            Icon(Icons.all_inclusive, color: Colors.white,)
           ],
         ),
       ),

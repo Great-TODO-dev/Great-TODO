@@ -8,8 +8,9 @@ void main() {
   MainStore mainStore = MainStore();
   runApp(CupertinoApp(
     color: Colors.grey,
-    theme: CupertinoThemeData(
-        textTheme: CupertinoTextThemeData(brightness: Brightness.dark)),
+    theme: MaterialBasedCupertinoThemeData(
+        materialTheme:
+            ThemeData(fontFamily: 'Montserrat', primaryColor: Colors.white)),
     initialRoute: '/',
     routes: {
       '/': (context) => HomePage(),

@@ -39,7 +39,7 @@ class _InboxSectionState extends State<InboxSection> {
                     margin: EdgeInsets.only(left: 10.0),
                     child: Text(
                       sectionName,
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(fontSize: 30, color: Colors.white),
                     ),
                   )
                 ],
