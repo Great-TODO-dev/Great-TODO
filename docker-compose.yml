@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  app-ext:
+    image: node:stretch
+    container_name: great-todo-app
+    volumes:
+      - ./backend:/app
+    command: node ./app/app.js
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000

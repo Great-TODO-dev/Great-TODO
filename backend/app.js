@@ -65,7 +65,7 @@ app.put("/events/:id", function(req, res){
     res.sendStatus(200);
 })
 
-//НЕ РАБОТАЕТ ПОКА ЧТО 
+//НЕ РАБОТАЕТ ПОКА ЧТО
 app.delete("/events/:id", function(req, res){
     var events = events.filter(function(event){
         return event.id !== Number(req.params.id)
@@ -74,6 +74,6 @@ app.delete("/events/:id", function(req, res){
     //res.sendStatus(200);
 })
 
-app.listen(3012, function () {
-    console.log(`Listening on port 3012`);
+app.listen(PORT, function () {
+    console.log(`Listening on port ${PORT}`);
 })
