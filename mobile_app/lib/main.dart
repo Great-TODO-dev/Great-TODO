@@ -1,12 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
 import './Stores/MainStore.dart';
 
-void main() {
-  MainStore mainStore = MainStore();
-  runApp(CupertinoApp(
+void main() => runApp(App());
+
+class App extends StatelessWidget {
+  final MainStore mainStore = MainStore();
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp(
     color: Colors.grey,
     theme: MaterialBasedCupertinoThemeData(
         materialTheme:
@@ -14,7 +20,8 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => HomePage(),
-      '/todayTab': (context) => TodayTab(mainStore.updateTasks()),
+      '/todayTab': (context) => TodayTab(mainStore.tasks),
     },
-  ));
+  );
+  }
 }

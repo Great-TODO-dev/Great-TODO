@@ -3,22 +3,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 import './TaskFullView.dart';
+import '../Models/Task.dart';
 
-class Task extends StatefulWidget {
-  final String name;
-  bool state;
-  Task(this.name, this.state);
+class TaskLabel extends StatefulWidget {
+  final Task task;
+  TaskLabel(this.task);
 
   @override
   State<StatefulWidget> createState() {
-    return _TaskState(name, state);
+    return _TaskLabelState(task);
   }
 }
 
-class _TaskState extends State<Task> {
-  final String name;
-  bool checkboxState;
-  _TaskState(this.name, this.checkboxState);
+class _TaskLabelState extends State<TaskLabel> {
+  final Task task;
+  _TaskLabelState(this.task);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _TaskState extends State<Task> {
         Navigator.push(
             context,
             new MaterialPageRoute(
-                builder: (BuildContext context) => new TaskFullView(name)));
+                builder: (BuildContext context) => new TaskFullView(task)));
       },
       child: Container(
         padding: EdgeInsets.only(right: 15),
@@ -37,16 +36,16 @@ class _TaskState extends State<Task> {
               child: Row(
                 children: [
                   CupertinoSwitch(
-                    value: checkboxState,
+                    value: task.doneState,
                     onChanged: (stateBool) {
                       setState(() {
-                        checkboxState = !checkboxState;
+                        task.doneState = !task.doneState;
                       });
                     },
                     activeColor: Colors.blue,
                   ),
                   Text(
-                    name,
+                    task.name,
                     style: TextStyle(fontSize: 30, color: Colors.white),
                     overflow: TextOverflow.clip,
                   ),

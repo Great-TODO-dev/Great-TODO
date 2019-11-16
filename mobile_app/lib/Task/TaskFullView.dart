@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-class TaskFullView extends StatefulWidget {
-  String name;
-  TaskFullView(this.name);
+import '../Models/Task.dart';
 
-  _TaskFullViewState createState() => _TaskFullViewState(name);
+class TaskFullView extends StatefulWidget {
+  final Task task;
+  TaskFullView(this.task);
+
+  _TaskFullViewState createState() => _TaskFullViewState(task);
 }
 
 class _TaskFullViewState extends State<TaskFullView> {
-  final String name;
-  bool checkboxState = true;
-  _TaskFullViewState(this.name);
+  final Task task;
+  _TaskFullViewState(this.task);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,10 @@ class _TaskFullViewState extends State<TaskFullView> {
               child: Row(
               children: [
                 Checkbox(
-                  value: checkboxState,
+                  value: task.doneState,
                   onChanged: (stateBool) {
                     setState(() {
-                      checkboxState = !checkboxState;
+                      task.doneState = !task.doneState;
                     });
                   },
                   activeColor: Colors.blue,
@@ -35,11 +36,11 @@ class _TaskFullViewState extends State<TaskFullView> {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context, new MaterialPageRoute(
-                      builder: (BuildContext context) => new TaskFullView(name)
+                      builder: (BuildContext context) => new TaskFullView(task)
                     ));
                   },
                   child: Text(
-                    name,
+                    task.name,
                     style: TextStyle(fontSize: 30),
                   ),
                 )
