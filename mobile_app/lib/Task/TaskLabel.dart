@@ -25,7 +25,7 @@ class _TaskLabelState extends State<TaskLabel> {
       onPressed: () {
         Navigator.push(
             context,
-            new MaterialPageRoute(
+            new CupertinoPageRoute(
                 builder: (BuildContext context) => new TaskFullView(task)));
       },
       child: Container(

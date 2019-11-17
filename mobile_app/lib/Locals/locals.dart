@@ -4,6 +4,8 @@ class Locals {
   static const _anyTime = 'AnyTime';
   static const _someTime = 'SomeTime';
   static const _inbox = 'Inbox';
+  static const _name = 'Name';
+  static const _description = 'Description';
   Locals();
 
   static String get today => _todaySection;
@@ -15,4 +17,8 @@ class Locals {
   static String get someTime => _someTime;
 
   static String get inbox => _inbox;
+
+  static String get name => _name;
+
+  static String get description => _description;
 }
