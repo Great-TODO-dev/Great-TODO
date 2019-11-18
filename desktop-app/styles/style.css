@@ -1,0 +1,39 @@
+.container {
+    margin-top: 50px;
+}
+
+.sidebar {
+    padding-left: 60px;
+    border-right: 2px solid #B8B8B8;
+}
+
+.inset_button {
+    width: 150px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.inset_info {
+    padding-left: 100px;
+}
+
+.inset_title {
+    font-size: 34px;
+}
+
+.events_list {
+    margin-top: 50px;
+}
+
+.event {
+    margin-bottom: 20px;
+}
+
+.event_title {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.event_time {
+    float: right;
+}
