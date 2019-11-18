@@ -42,9 +42,6 @@ class _AddTaskCardState extends State<AddTaskCard> {
             ),
             TextFormField(
               controller: taskDescription,
-              onFieldSubmitted: (str) {
-                print("Submitted $str");
-              },
               showCursor: true,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(

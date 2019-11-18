@@ -13,17 +13,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      color: Colors.grey,
-      theme: MaterialBasedCupertinoThemeData(
-          materialTheme: ThemeData(
-              fontFamily: 'Montserrat',
-              primaryColor: Colors.white,
-              accentColor: Color.fromRGBO(47, 47, 47, 1))),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-        '/todayTab': (context) => TodayTab(mainStore.tasks),
-      },
-    );
+    color: Colors.grey,
+    theme: MaterialBasedCupertinoThemeData(
+        materialTheme:
+            ThemeData(fontFamily: 'Montserrat', primaryColor: Colors.white, accentColor: Color.fromRGBO(47, 47, 47, 1))),
+    initialRoute: '/',
+    routes: {
+      '/': (context) => HomePage(),
+      '/todayTab': (context) => TodayTab(mainStore.tasks, ValueKey("StringBased")),
+    },
+  );
   }
 }

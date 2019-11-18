@@ -7,29 +7,48 @@ import '../../Task/TaskLabel.dart';
 import '../../Task/AddTaskCard.dart';
 import './TodayTitle.dart';
 
+
 class TodayTab extends StatefulWidget {
+  bool needToShowAddDialog = false;
   final List<Task> tasks;
-  TodayTab(this.tasks);
+  final Key key;
+  TodayTab(this.tasks, this.key): super(key : key);
 
   @override
   _TodayTabState createState() => _TodayTabState();
 }
 
-class _TodayTabState extends State<TodayTab> {
+class _TodayTabState extends State<TodayTab> with AutomaticKeepAliveClientMixin {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  bool get wantKeepAlive => true;
+
   void _submitNewTask(Task task){
     setState(() {
+      widget.needToShowAddDialog = false;
       widget.tasks.add(task);
+    });
+  }
+
+  void showAddCard(){
+    setState(() {
+      widget.needToShowAddDialog = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.needToShowAddDialog);
     return CupertinoPageScaffold(
       backgroundColor: Colors.black,
       navigationBar: CupertinoNavigationBar(
         transitionBetweenRoutes: true,
         trailing: CupertinoButton(
-          onPressed: () {},
+          onPressed: () => showAddCard(),
           child: Icon(Icons.add, size: 25,),
         ),
         backgroundColor: Colors.black45,
@@ -38,7 +57,8 @@ class _TodayTabState extends State<TodayTab> {
         children: [
           TodayTitle(),
           ...(widget.tasks as List<Task>).map((task) => TaskLabel(task)).toList(),
-          AddTaskCard(_submitNewTask)
+          widget.needToShowAddDialog ?
+          AddTaskCard(_submitNewTask) : Container()
         ],
       ),
     );
