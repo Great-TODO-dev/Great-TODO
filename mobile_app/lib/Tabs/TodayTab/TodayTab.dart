@@ -11,8 +11,7 @@ import './TodayTitle.dart';
 class TodayTab extends StatefulWidget {
   bool needToShowAddDialog = false;
   final List<Task> tasks;
-  final Key key;
-  TodayTab(this.tasks, this.key): super(key : key);
+  TodayTab(this.tasks);
 
   @override
   _TodayTabState createState() => _TodayTabState();

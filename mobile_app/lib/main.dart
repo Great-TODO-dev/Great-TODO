@@ -20,7 +20,7 @@ class App extends StatelessWidget {
     initialRoute: '/',
     routes: {
       '/': (context) => HomePage(),
-      '/todayTab': (context) => TodayTab(mainStore.tasks, ValueKey("StringBased")),
+      '/todayTab': (context) => TodayTab(mainStore.tasks),
     },
   );
   }
