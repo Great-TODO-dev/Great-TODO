@@ -12,19 +12,17 @@ class TodayTab extends StatefulWidget {
   bool needToShowAddDialog = false;
   final List<Task> tasks;
   TodayTab(this.tasks);
-
+  
   @override
   _TodayTabState createState() => _TodayTabState();
 }
 
-class _TodayTabState extends State<TodayTab> with AutomaticKeepAliveClientMixin {
+class _TodayTabState extends State<TodayTab>{
 
   @override
   void initState() {
     super.initState();
   }
-
-  bool get wantKeepAlive => true;
 
   void _submitNewTask(Task task){
     setState(() {

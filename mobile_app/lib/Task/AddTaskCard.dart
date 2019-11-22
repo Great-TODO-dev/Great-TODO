@@ -7,13 +7,13 @@ class AddTaskCard extends StatefulWidget {
   final Function submitTask;
   AddTaskCard(this.submitTask);
 
-
   _AddTaskCardState createState() => _AddTaskCardState();
 }
 
 class _AddTaskCardState extends State<AddTaskCard> {
   final TextEditingController taskName = TextEditingController();
   final TextEditingController taskDescription = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   void validateAndSubmitTask() {
     print(taskName.text);
@@ -28,32 +28,32 @@ class _AddTaskCardState extends State<AddTaskCard> {
       color: Color.fromRGBO(47, 47, 47, 1),
       margin: EdgeInsets.all(15),
       child: Padding(
-          padding: EdgeInsets.all(10),
-              child: Column(
+        padding: EdgeInsets.all(10),
+        child: Column(
           children: [
-            TextField(
-              controller: taskName,
-              showCursor: true,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: Locals.name,
-                hintStyle: TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                border: InputBorder.none),
-            ),
-            TextFormField(
-              controller: taskDescription,
-              showCursor: true,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: Locals.description,
-                hintStyle: TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                border: InputBorder.none),
+            Form(
+              key: formKey,
+              child: TextField(
+                controller: taskDescription,
+                showCursor: true,
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    hintText: Locals.description,
+                    hintStyle:
+                        TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                    border: InputBorder.none),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-              IconButton(icon: Icon(Icons.add), iconSize: 30, onPressed: () => validateAndSubmitTask(),)
-            ],)
+                IconButton(
+                  icon: Icon(Icons.add),
+                  iconSize: 30,
+                  onPressed: () => validateAndSubmitTask(),
+                )
+              ],
+            )
           ],
         ),
       ),

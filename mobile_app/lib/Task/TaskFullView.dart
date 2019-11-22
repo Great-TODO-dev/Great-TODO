@@ -34,11 +34,7 @@ class _TaskFullViewState extends State<TaskFullView> {
                   checkColor: Colors.white,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, new MaterialPageRoute(
-                      builder: (BuildContext context) => new TaskFullView(task)
-                    ));
-                  },
+                  onTap: () {},
                   child: Text(
                     task.name,
                     style: TextStyle(fontSize: 30),

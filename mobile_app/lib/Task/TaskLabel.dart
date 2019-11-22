@@ -22,12 +22,7 @@ class _TaskLabelState extends State<TaskLabel> {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: () {
-        Navigator.push(
-            context,
-            new CupertinoPageRoute(
-                builder: (BuildContext context) => new TaskFullView(task)));
-      },
+      onPressed: () {},
       child: Container(
         padding: EdgeInsets.only(right: 15),
         child: Row(
