@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
 import './Stores/MainStore.dart';
+import './Task/AddTaskPage.dart';
 
 void main() => runApp(App());
 
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
     routes: {
       '/': (context) => HomePage(),
       '/todayTab': (context) => TodayTab(mainStore.tasks),
+      '/task' : (context) => TaskPage()
     },
   );
   }

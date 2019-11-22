@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 
 import '../../Models/Task.dart';
 import '../../Task/TaskLabel.dart';
-import '../../Task/AddTaskCard.dart';
 import './TodayTitle.dart';
 
 
@@ -12,7 +11,7 @@ class TodayTab extends StatefulWidget {
   bool needToShowAddDialog = false;
   final List<Task> tasks;
   TodayTab(this.tasks);
-  
+
   @override
   _TodayTabState createState() => _TodayTabState();
 }
@@ -31,10 +30,8 @@ class _TodayTabState extends State<TodayTab>{
     });
   }
 
-  void showAddCard(){
-    setState(() {
-      widget.needToShowAddDialog = true;
-    });
+  void moveToAddNewTaskPage(){
+    Navigator.of(context).pushNamed('/task', arguments: _submitNewTask);
   }
 
   @override
@@ -45,7 +42,7 @@ class _TodayTabState extends State<TodayTab>{
       navigationBar: CupertinoNavigationBar(
         transitionBetweenRoutes: true,
         trailing: CupertinoButton(
-          onPressed: () => showAddCard(),
+          onPressed: () => moveToAddNewTaskPage(),
           child: Icon(Icons.add, size: 25,),
         ),
         backgroundColor: Colors.black45,
@@ -53,9 +50,7 @@ class _TodayTabState extends State<TodayTab>{
       child: ListView(
         children: [
           TodayTitle(),
-          ...(widget.tasks as List<Task>).map((task) => TaskLabel(task)).toList(),
-          widget.needToShowAddDialog ?
-          AddTaskCard(_submitNewTask) : Container()
+          ...(widget.tasks as List<Task>).map((task) => TaskLabel(task)).toList()
         ],
       ),
     );
