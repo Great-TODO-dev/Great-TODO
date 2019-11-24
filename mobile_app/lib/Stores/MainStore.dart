@@ -1,4 +1,4 @@
-import '../Models/Task.dart';
+import 'Task.dart';
 
 class MainStore {
   final List<Task> _tasks = [];

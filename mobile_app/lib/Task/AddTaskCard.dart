@@ -1,7 +1,7 @@
-import 'package:Great_TODO/Models/Task.dart';
 import 'package:flutter/material.dart';
 
 import '../Locals/locals.dart';
+import '../Stores/Task.dart';
 
 class AddTaskCard extends StatefulWidget {
   final Function submitTask;

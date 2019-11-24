@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Locals/locals.dart';
-import '../Models/Task.dart';
+import '../Stores/Task.dart';
 
 class TaskPage extends StatefulWidget {
   TaskPage() {

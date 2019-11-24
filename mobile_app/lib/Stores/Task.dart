@@ -1,4 +1,6 @@
-class Task {
+import 'package:flutter/cupertino.dart';
+
+class Task with ChangeNotifier {
   int _id;
   String _name;
   String _description;
@@ -6,6 +8,7 @@ class Task {
   dynamic _subIssues;
   DateTime _date;
   DateTime _deadline;
+
   Task([this._name = '', this._description = '']) {
     _id = generateId();
     _doneState = false;

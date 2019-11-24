@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Models/Task.dart';
+import '../Stores/Task.dart';
 
 class TaskFullView extends StatefulWidget {
   final Task task;

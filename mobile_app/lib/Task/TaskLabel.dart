@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 import './TaskFullView.dart';
-import '../Models/Task.dart';
+import '../Stores/Task.dart';
 
 class TaskLabel extends StatefulWidget {
   final Task task;
