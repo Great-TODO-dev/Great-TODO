@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Locals/locals.dart';
 import '../Stores/Task.dart';
+import '../Stores/Tasks.dart';
 
 class TaskPage extends StatefulWidget {
-  TaskPage() {
-    print("Rebuild State");
-  }
 
   _TaskPageState createState() => _TaskPageState();
 }
@@ -15,21 +14,44 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   final TextEditingController taskName = TextEditingController();
   final TextEditingController taskDescription = TextEditingController();
-  Function _submitNewTask;
+  Task _task;
 
   _TaskPageState();
 
-  _validateTask() {
-    String name = taskName.text;
-    String description = taskDescription.text;
-    Task task = new Task(name, description);
-    _submitNewTask(task);
+  void _validateTask() {
+    if (_task.id == null) {
+      String name = taskName.text;
+      String description = taskDescription.text;
+      Task task = new Task(name, description);
+      Provider.of<Tasks>(context, listen: false).addTask(task);
+      Navigator.pop(context);
+      return;
+    }
+
+    _task.name = taskName.text;
+    _task.description = taskDescription.text;
     Navigator.pop(context);
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _task = ModalRoute.of(context).settings?.arguments == null ? new Task() : ModalRoute.of(context).settings.arguments as Task;
+    if (_task.id != null) {
+      taskName.text = _task.name;
+      taskDescription.text = _task.description;
+    }
+  }
+
+  @override
+  void dispose() {
+    taskName.dispose();
+    taskDescription.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _submitNewTask = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton(
@@ -41,13 +63,13 @@ class _TaskPageState extends State<TaskPage> {
         ),
         appBar: CupertinoNavigationBar(
           transitionBetweenRoutes: true,
-          trailing: CupertinoButton(
+          trailing: _task.id != null ? CupertinoButton(
             onPressed: () {},
             child: Icon(
-              Icons.add,
+              Icons.delete,
               size: 25,
             ),
-          ),
+          ) : Container(),
           backgroundColor: Colors.black45,
         ),
         body: Padding(

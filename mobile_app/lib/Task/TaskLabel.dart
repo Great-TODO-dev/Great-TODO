@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
-import './TaskFullView.dart';
 import '../Stores/Task.dart';
 
-class TaskLabel extends StatefulWidget {
-  final Task task;
-  TaskLabel(this.task);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _TaskLabelState(task);
-  }
-}
-
-class _TaskLabelState extends State<TaskLabel> {
-  final Task task;
-  _TaskLabelState(this.task);
+class TaskLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final task = Provider.of<Task>(context);
     return FlatButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed('/task', arguments: task);
+      },
       child: Container(
         padding: EdgeInsets.only(right: 15),
         child: Row(
@@ -32,10 +23,8 @@ class _TaskLabelState extends State<TaskLabel> {
                 children: [
                   CupertinoSwitch(
                     value: task.doneState,
-                    onChanged: (stateBool) {
-                      setState(() {
-                        task.doneState = !task.doneState;
-                      });
+                    onChanged: (_) {
+                      task.changeDoneState();
                     },
                     activeColor: Colors.blue,
                   ),

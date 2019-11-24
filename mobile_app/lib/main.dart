@@ -17,23 +17,26 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(
-            value: Tasks(),
-          )
-        ],
-          child: CupertinoApp(
-      color: Colors.grey,
-      theme: MaterialBasedCupertinoThemeData(
-          materialTheme:
-              ThemeData(fontFamily: 'Montserrat', primaryColor: Colors.white, accentColor: Color.fromRGBO(47, 47, 47, 1))),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-        '/todayTab': (context) => TodayTab(),
-        '/task' : (context) => TaskPage()
-      },
-  ),
+      providers: [
+        ChangeNotifierProvider.value(
+          value: Tasks(),
+        )
+      ],
+      child: CupertinoApp(
+        color: Colors.grey,
+        theme: MaterialBasedCupertinoThemeData(
+            materialTheme: ThemeData(
+          fontFamily: 'Montserrat',
+          primaryColor: Colors.white,
+          accentColor: Color.fromRGBO(47, 47, 47, 1),
+        )),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => HomePage(),
+          '/todayTab': (context) => TodayTab(),
+          '/task': (context) => TaskPage()
+        },
+      ),
     );
   }
 }

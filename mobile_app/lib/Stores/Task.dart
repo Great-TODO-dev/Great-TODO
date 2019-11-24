@@ -10,7 +10,7 @@ class Task with ChangeNotifier {
   DateTime _deadline;
 
   Task([this._name = '', this._description = '']) {
-    _id = generateId();
+    _id = null;
     _doneState = false;
   }
 
@@ -32,9 +32,17 @@ class Task with ChangeNotifier {
 
   DateTime get date => _date;
 
+  int get id => _id;
+
   bool get doneState => _doneState;
 
-  int generateId() {
-    return 4;
+  void changeDoneState(){
+    _doneState = !_doneState;
+    notifyListeners();
+  }
+
+  void generateId() {
+    // TODO: implement generate ID pattern
+    _id = 4;
   }
 }

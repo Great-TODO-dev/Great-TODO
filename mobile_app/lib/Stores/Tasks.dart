@@ -9,8 +9,23 @@ class Tasks with ChangeNotifier {
     Task('Interpolate string', 'not now'),
   ];
 
+  Tasks(){
+    _forEachId();
+  }
+
   List<Task> get tasks {
-    return [..._tasks];
+    return [..._tasks.reversed];
+  }
+
+  void _forEachId() {
+    _tasks.forEach((task) {
+      task.generateId();
+    });
+  }
+
+  addTask(Task task){
+    task.generateId();
+    _tasks.add(task);
   }
 
   int get countOfTasks {
