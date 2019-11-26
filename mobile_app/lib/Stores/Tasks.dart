@@ -19,7 +19,8 @@ class Tasks with ChangeNotifier {
 
   void _forEachId() {
     _tasks.forEach((task) {
-      task.generateId();
+      int id = _tasks.length == 0 ? 0 : _tasks.length;
+      task.setId(id);
     });
   }
 
@@ -29,7 +30,7 @@ class Tasks with ChangeNotifier {
   }
 
   addTask(Task task){
-    task.generateId();
+    task.setId(_tasks.length);
     _tasks.add(task);
   }
 

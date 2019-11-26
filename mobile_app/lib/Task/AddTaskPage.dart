@@ -7,7 +7,6 @@ import '../Stores/Task.dart';
 import '../Stores/Tasks.dart';
 
 class TaskPage extends StatefulWidget {
-
   _TaskPageState createState() => _TaskPageState();
 }
 
@@ -36,7 +35,9 @@ class _TaskPageState extends State<TaskPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _task = ModalRoute.of(context).settings?.arguments == null ? new Task() : ModalRoute.of(context).settings.arguments as Task;
+    _task = ModalRoute.of(context).settings?.arguments == null
+        ? new Task()
+        : ModalRoute.of(context).settings.arguments as Task;
     if (_task.id != null) {
       taskName.text = _task.name;
       taskDescription.text = _task.description;
@@ -50,26 +51,32 @@ class _TaskPageState extends State<TaskPage> {
     super.dispose();
   }
 
+  bool get _needToShowCompleteButton {
+    return taskName.text != '' || taskDescription.text != '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: _needToShowCompleteButton ? FloatingActionButton(
           onPressed: () => _validateTask(),
           child: Icon(
             Icons.done,
             size: 40,
           ),
-        ),
+        ) : Container(),
         appBar: CupertinoNavigationBar(
           transitionBetweenRoutes: true,
-          trailing: _task.id != null ? CupertinoButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.delete,
-              size: 25,
-            ),
-          ) : Container(),
+          trailing: _task.id != null
+              ? CupertinoButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.delete,
+                    size: 25,
+                  ),
+                )
+              : Container(),
           backgroundColor: Colors.black45,
         ),
         body: Padding(
@@ -83,11 +90,15 @@ class _TaskPageState extends State<TaskPage> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: Locals.name,
-                  hintStyle: TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                  hintStyle:
+                      TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
                 ),
               ),
               SizedBox(height: 20),
               TextField(
+                onChanged: (_) {
+                  setState(() {});
+                },
                 maxLines: null,
                 controller: taskDescription,
                 showCursor: true,
@@ -95,7 +106,8 @@ class _TaskPageState extends State<TaskPage> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: Locals.description,
-                  hintStyle: TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                  hintStyle:
+                      TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
                 ),
               )
             ],

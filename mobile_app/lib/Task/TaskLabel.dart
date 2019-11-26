@@ -23,11 +23,6 @@ class TaskLabel extends StatelessWidget {
                   Material(
                     color: Colors.black,
                     child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.red,
-                              width: 3,
-                              style: BorderStyle.solid)),
                       child: FittedBox(
                         fit: BoxFit.cover,
                         child: Checkbox(

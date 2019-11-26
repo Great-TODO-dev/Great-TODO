@@ -11,7 +11,7 @@ class Task with ChangeNotifier {
 
   Task([this._name = '', this._description = '']) {
     _id = null;
-    _doneState = false;
+    _doneState = true;
   }
 
   set name(name) => _name = name;
@@ -36,13 +36,15 @@ class Task with ChangeNotifier {
 
   bool get doneState => _doneState;
 
-  void changeDoneState(){
+  void changeDoneState() {
     _doneState = !_doneState;
     notifyListeners();
   }
 
-  void generateId() {
-    // TODO: implement generate ID pattern
-    _id = 4;
+  void setId(id) {
+    if (_id == null) {
+      _id = id;
+    }
+    return;
   }
 }
