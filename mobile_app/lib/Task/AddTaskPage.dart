@@ -6,6 +6,8 @@ import '../Locals/locals.dart';
 import '../Stores/Task.dart';
 import '../Stores/Tasks.dart';
 
+import '../widgets/TagsList.dart';
+
 class TaskPage extends StatefulWidget {
   _TaskPageState createState() => _TaskPageState();
 }
@@ -64,13 +66,15 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        floatingActionButton: _needToShowCompleteButton ? FloatingActionButton(
-          onPressed: () => _validateTask(),
-          child: Icon(
-            Icons.done,
-            size: 40,
-          ),
-        ) : Container(),
+        floatingActionButton: _needToShowCompleteButton
+            ? FloatingActionButton(
+                onPressed: () => _validateTask(),
+                child: Icon(
+                  Icons.done,
+                  size: 40,
+                ),
+              )
+            : Container(),
         appBar: CupertinoNavigationBar(
           transitionBetweenRoutes: true,
           trailing: _task.id != null
@@ -78,7 +82,7 @@ class _TaskPageState extends State<TaskPage> {
                   onPressed: () => _removeTask(),
                   child: Icon(
                     Icons.delete,
-                    size: 25,
+                    size: 30,
                   ),
                 )
               : Container(),
@@ -99,6 +103,8 @@ class _TaskPageState extends State<TaskPage> {
                       TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
                 ),
               ),
+              SizedBox(height: 20),
+              TagList(),
               SizedBox(height: 20),
               TextField(
                 onChanged: (_) {

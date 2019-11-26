@@ -9,12 +9,24 @@ class Tasks with ChangeNotifier {
     Task('Interpolate string', 'not now'),
   ];
 
+  List<String> _tags = [
+    'hard',
+    'fast',
+    'define',
+    'decompose',
+    'listview'
+  ];
+
   Tasks(){
     _forEachId();
   }
 
   List<Task> get tasks {
     return [..._tasks.reversed];
+  }
+
+  List<String> get tags {
+    return [..._tags.reversed];
   }
 
   void _forEachId() {
