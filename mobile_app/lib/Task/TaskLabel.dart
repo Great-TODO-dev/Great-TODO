@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../Stores/Task.dart';
 
 class TaskLabel extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final task = Provider.of<Task>(context);
@@ -21,12 +20,25 @@ class TaskLabel extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  CupertinoSwitch(
-                    value: task.doneState,
-                    onChanged: (_) {
-                      task.changeDoneState();
-                    },
-                    activeColor: Colors.blue,
+                  Material(
+                    color: Colors.black,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.red,
+                              width: 3,
+                              style: BorderStyle.solid)),
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Checkbox(
+                          value: task.doneState,
+                          onChanged: (_) {
+                            task.changeDoneState();
+                          },
+                          activeColor: Colors.blue,
+                        ),
+                      ),
+                    ),
                   ),
                   Text(
                     task.name,
@@ -36,7 +48,10 @@ class TaskLabel extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.all_inclusive, color: Colors.white,)
+            Icon(
+              Icons.all_inclusive,
+              color: Colors.white,
+            )
           ],
         ),
       ),

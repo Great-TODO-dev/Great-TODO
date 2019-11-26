@@ -23,6 +23,11 @@ class Tasks with ChangeNotifier {
     });
   }
 
+  void removeSingleTask(int id){
+    // _tasks.removeWhere(test);
+    notifyListeners();
+  }
+
   addTask(Task task){
     task.generateId();
     _tasks.add(task);

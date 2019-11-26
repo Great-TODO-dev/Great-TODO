@@ -79,7 +79,7 @@ class _TaskPageState extends State<TaskPage> {
               TextField(
                 controller: taskName,
                 showCursor: true,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 28),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: Locals.name,
@@ -91,7 +91,7 @@ class _TaskPageState extends State<TaskPage> {
                 maxLines: null,
                 controller: taskDescription,
                 showCursor: true,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 30),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: Locals.description,
