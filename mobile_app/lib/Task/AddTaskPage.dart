@@ -32,6 +32,11 @@ class _TaskPageState extends State<TaskPage> {
     Navigator.pop(context);
   }
 
+  void _removeTask() {
+    Provider.of<Tasks>(context, listen: false).removeSingleTask(_task.id);
+    Navigator.pop(context);
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -70,7 +75,7 @@ class _TaskPageState extends State<TaskPage> {
           transitionBetweenRoutes: true,
           trailing: _task.id != null
               ? CupertinoButton(
-                  onPressed: () {},
+                  onPressed: () => _removeTask(),
                   child: Icon(
                     Icons.delete,
                     size: 25,

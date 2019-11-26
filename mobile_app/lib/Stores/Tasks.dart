@@ -25,7 +25,7 @@ class Tasks with ChangeNotifier {
   }
 
   void removeSingleTask(int id){
-    // _tasks.removeWhere(test);
+    _tasks.removeWhere((task) => task.id == id);
     notifyListeners();
   }
 
