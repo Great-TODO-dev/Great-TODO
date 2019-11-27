@@ -8,10 +8,15 @@ class Task with ChangeNotifier {
   dynamic _subIssues;
   DateTime _date;
   DateTime _deadline;
+  List<String> _tags;
 
   Task([this._name = '', this._description = '']) {
     _id = null;
     _doneState = true;
+    _tags =[
+      'fast',
+      'hard'
+    ];
   }
 
   set name(name) => _name = name;
@@ -35,6 +40,20 @@ class Task with ChangeNotifier {
   int get id => _id;
 
   bool get doneState => _doneState;
+
+  List<String> get tags => _tags;
+
+  void addTag(tag){
+    if (!_tags.contains(tag)) {
+      _tags.add(tag);
+    }
+  }
+
+  void removeTag(tag){
+    if (_tags.length != 0) {
+
+    }
+  }
 
   void changeDoneState() {
     _doneState = !_doneState;

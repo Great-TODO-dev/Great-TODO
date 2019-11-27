@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 
 import '../../Task/TaskLabel.dart';
 import './TodayTitle.dart';
+import '../../widgets/TagsList.dart';
 
 import '../../Stores/Tasks.dart';
 
 class TodayTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     void moveToAddNewTaskPage() {
       Navigator.of(context).pushNamed('/task');
     }
@@ -31,12 +31,22 @@ class TodayTab extends StatelessWidget {
         ),
       ),
       child: ListView.builder(
-        itemCount: tasks.countOfTasks + 1,
-        itemBuilder: (ctx, index) => index == 0
-            ? TodayTitle()
-            : ChangeNotifierProvider.value(
-                value: tasks.tasks[index - 1],
-                child: TaskLabel()),
+        itemCount: tasks.countOfTasks + 2,
+        itemBuilder: (ctx, index) {
+          if (index == 0) {
+            return TodayTitle();
+          }
+          if (index == 1) {
+            return Column(
+              children: [
+                TagList(),
+                SizedBox(height: 20,)
+              ],
+            );
+          }
+          return ChangeNotifierProvider.value(
+              value: tasks.tasks[index - 2], child: TaskLabel());
+        },
       ),
     );
   }

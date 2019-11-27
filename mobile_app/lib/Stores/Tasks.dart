@@ -10,6 +10,7 @@ class Tasks with ChangeNotifier {
   ];
 
   List<String> _tags = [
+    'All',
     'hard',
     'fast',
     'define',
@@ -26,7 +27,7 @@ class Tasks with ChangeNotifier {
   }
 
   List<String> get tags {
-    return [..._tags.reversed];
+    return [..._tags];
   }
 
   void _forEachId() {

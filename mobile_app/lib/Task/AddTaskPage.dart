@@ -104,7 +104,7 @@ class _TaskPageState extends State<TaskPage> {
                 ),
               ),
               SizedBox(height: 20),
-              TagList(),
+              // TagList(),
               SizedBox(height: 20),
               TextField(
                 onChanged: (_) {

@@ -10,6 +10,23 @@ class TagList extends StatefulWidget {
 }
 
 class _TagListState extends State<TagList> {
+  int _selectedTagId = null;
+
+  bool _isSelectedTag(int id) {
+    return _selectedTagId == id;
+  }
+
+  void _selectTag(int id) {
+    setState(() {
+      print(id);
+      if (_selectedTagId == id) {
+        _selectedTagId = null;
+        return;
+      }
+      _selectedTagId = id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final tags = Provider.of<Tasks>(context).tags;
@@ -19,16 +36,18 @@ class _TagListState extends State<TagList> {
         scrollDirection: Axis.horizontal,
         itemCount: tags.length,
         itemBuilder: (BuildContext context, int i) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            constraints: BoxConstraints(minWidth: 70, maxWidth: 180),
-            decoration: BoxDecoration(
-
-              borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              border: Border.all(width: 2, color: Color.fromRGBO(196, 196, 196, 1))
-            ),
-            child: Column(
+          return GestureDetector(
+            behavior: HitTestBehavior.deferToChild,
+            onTap: () => _selectTag(i),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              constraints: BoxConstraints(minWidth: 70, maxWidth: 180),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  border: Border.all(
+                      width: 2, color: _isSelectedTag(i) ? Colors.blue : Color.fromRGBO(196, 196, 196, 1))),
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -39,6 +58,7 @@ class _TagListState extends State<TagList> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ]),
+            ),
           );
         },
       ),
