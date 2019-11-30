@@ -10,21 +10,14 @@ class TagList extends StatefulWidget {
 }
 
 class _TagListState extends State<TagList> {
-  int _selectedTagId = null;
+  int _selectedTagId = 0;
 
   bool _isSelectedTag(int id) {
-    return _selectedTagId == id;
+    return Provider.of<Tasks>(context, listen: false).selectedTagId == id;
   }
 
   void _selectTag(int id) {
-    setState(() {
-      print(id);
-      if (_selectedTagId == id) {
-        _selectedTagId = null;
-        return;
-      }
-      _selectedTagId = id;
-    });
+    Provider.of<Tasks>(context, listen: false).setSelectedTagId(id);
   }
 
   @override
@@ -46,7 +39,10 @@ class _TagListState extends State<TagList> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                   border: Border.all(
-                      width: 2, color: _isSelectedTag(i) ? Colors.blue : Color.fromRGBO(196, 196, 196, 1))),
+                      width: 2,
+                      color: _isSelectedTag(i)
+                          ? Colors.blue
+                          : Color.fromRGBO(196, 196, 196, 1))),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

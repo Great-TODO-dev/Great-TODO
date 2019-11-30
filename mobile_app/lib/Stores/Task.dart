@@ -14,6 +14,7 @@ class Task with ChangeNotifier {
     _id = null;
     _doneState = true;
     _tags =[
+      'All',
       'fast',
       'hard'
     ];
