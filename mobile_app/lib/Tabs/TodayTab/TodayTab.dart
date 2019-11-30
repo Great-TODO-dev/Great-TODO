@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../Task/TaskLabel.dart';
 import './TodayTitle.dart';
-import '../../widgets/TagsList.dart';
+import '../../widgets/common/TagsList.dart';
 
 import '../../Stores/Tasks.dart';
 

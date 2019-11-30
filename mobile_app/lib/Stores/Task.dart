@@ -13,7 +13,7 @@ class Task with ChangeNotifier {
   Task([this._name = '', this._description = '']) {
     _id = null;
     _doneState = true;
-    _tags =[
+    _tags = [
       'All',
       'fast',
       'hard'

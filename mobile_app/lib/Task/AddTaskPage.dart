@@ -6,8 +6,6 @@ import '../Locals/locals.dart';
 import '../Stores/Task.dart';
 import '../Stores/Tasks.dart';
 
-import '../widgets/TagsList.dart';
-
 class TaskPage extends StatefulWidget {
   _TaskPageState createState() => _TaskPageState();
 }
@@ -82,6 +80,7 @@ class _TaskPageState extends State<TaskPage> {
                   onPressed: () => _removeTask(),
                   child: Icon(
                     Icons.delete,
+                    color: Colors.red,
                     size: 30,
                   ),
                 )

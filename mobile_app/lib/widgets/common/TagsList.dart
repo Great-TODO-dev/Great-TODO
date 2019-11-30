@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Stores/Tasks.dart';
+import '../../Stores/Tasks.dart';
 
 class TagList extends StatefulWidget {
   TagList();
@@ -10,7 +10,6 @@ class TagList extends StatefulWidget {
 }
 
 class _TagListState extends State<TagList> {
-  int _selectedTagId = 0;
 
   bool _isSelectedTag(int id) {
     return Provider.of<Tasks>(context, listen: false).selectedTagId == id;
