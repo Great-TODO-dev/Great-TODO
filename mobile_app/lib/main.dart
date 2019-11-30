@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './Stores/Tasks.dart';
+import './Stores/TodayTabStore.dart';
 
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(
           value: Tasks(),
-        )
+        ),
       ],
       child: CupertinoApp(
         color: Colors.grey,

@@ -6,6 +6,8 @@ import '../Locals/locals.dart';
 import '../Stores/Task.dart';
 import '../Stores/Tasks.dart';
 
+import '../widgets/TagListTask.dart';
+
 class TaskPage extends StatefulWidget {
   _TaskPageState createState() => _TaskPageState();
 }
@@ -62,66 +64,69 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black,
-        floatingActionButton: _needToShowCompleteButton
-            ? FloatingActionButton(
-                onPressed: () => _validateTask(),
-                child: Icon(
-                  Icons.done,
-                  size: 40,
-                ),
-              )
-            : Container(),
-        appBar: CupertinoNavigationBar(
-          transitionBetweenRoutes: true,
-          trailing: _task.id != null
-              ? CupertinoButton(
-                  onPressed: () => _removeTask(),
+    return ChangeNotifierProvider.value(
+          value: _task,
+          child: Scaffold(
+          backgroundColor: Colors.black,
+          floatingActionButton: _needToShowCompleteButton
+              ? FloatingActionButton(
+                  onPressed: () => _validateTask(),
                   child: Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                    size: 30,
+                    Icons.done,
+                    size: 40,
                   ),
                 )
               : Container(),
-          backgroundColor: Colors.black45,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: taskName,
-                showCursor: true,
-                style: TextStyle(color: Colors.white, fontSize: 28),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: Locals.name,
-                  hintStyle:
-                      TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                ),
-              ),
-              SizedBox(height: 20),
-              // TagList(),
-              SizedBox(height: 20),
-              TextField(
-                onChanged: (_) {
-                  setState(() {});
-                },
-                maxLines: null,
-                controller: taskDescription,
-                showCursor: true,
-                style: TextStyle(color: Colors.white, fontSize: 30),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: Locals.description,
-                  hintStyle:
-                      TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                ),
-              )
-            ],
+          appBar: CupertinoNavigationBar(
+            transitionBetweenRoutes: true,
+            trailing: _task.id != null
+                ? CupertinoButton(
+                    onPressed: () => _removeTask(),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                      size: 30,
+                    ),
+                  )
+                : Container(),
+            backgroundColor: Colors.black45,
           ),
-        ));
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: taskName,
+                  showCursor: true,
+                  style: TextStyle(color: Colors.white, fontSize: 28),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: Locals.name,
+                    hintStyle:
+                        TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                  ),
+                ),
+                SizedBox(height: 20),
+                TagListTask(),
+                SizedBox(height: 20),
+                TextField(
+                  onChanged: (_) {
+                    setState(() {});
+                  },
+                  maxLines: null,
+                  controller: taskDescription,
+                  showCursor: true,
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: Locals.description,
+                    hintStyle:
+                        TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                  ),
+                )
+              ],
+            ),
+          )),
+    );
   }
 }
