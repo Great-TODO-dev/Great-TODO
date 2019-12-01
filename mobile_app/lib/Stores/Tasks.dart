@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
+import '../Locals/locals.dart';
 
 class Tasks with ChangeNotifier {
   List<Task> _tasks = [
@@ -9,19 +10,13 @@ class Tasks with ChangeNotifier {
     Task('Interpolate string', 'not now'),
   ];
 
-  List<String> _tags = [
-    'All',
-    'hard',
-    'fast',
-    'define',
-    'decompose',
-    'listview'
-  ];
-
   String _selectedTag;
 
-  Tasks([this._selectedTag = 'All']) {
+  Tasks([this._selectedTag]) {
     _forEachId();
+    if (_selectedTag == null) {
+      _selectedTag = Locals.commonTag;
+    }
   }
 
   List<Task> get tasks {
@@ -34,7 +29,7 @@ class Tasks with ChangeNotifier {
   }
 
   List<String> get tags {
-    List<String> buffer = ['All'];
+    List<String> buffer = [Locals.commonTag];
     _tasks.forEach((task) {
       task.tags.forEach((tag) {
         if (!buffer.contains(tag)) {
@@ -47,7 +42,7 @@ class Tasks with ChangeNotifier {
 
   void setSelectedTag(String tag) {
     if (tag == _selectedTag) {
-      _selectedTag = 'All';
+      _selectedTag = Locals.commonTag;
     } else {
       _selectedTag = tag;
     }
@@ -55,7 +50,7 @@ class Tasks with ChangeNotifier {
   }
 
   void resetSelectedTag() {
-    _selectedTag = 'All';
+    _selectedTag = Locals.commonTag;
   }
 
   String get selectedTagId {
@@ -71,6 +66,7 @@ class Tasks with ChangeNotifier {
 
   void removeSingleTask(int id) {
     _tasks.removeWhere((task) => task.id == id);
+    resetSelectedTag();
     notifyListeners();
   }
 

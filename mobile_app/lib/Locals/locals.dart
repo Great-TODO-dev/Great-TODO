@@ -6,7 +6,8 @@ class Locals {
   static const _inbox = 'Inbox';
   static const _name = 'Name';
   static const _description = 'Description';
-  Locals();
+  static const _commonTag = 'All';
+  const Locals();
 
   static String get today => _todaySection;
 
@@ -21,4 +22,6 @@ class Locals {
   static String get name => _name;
 
   static String get description => _description;
+
+  static  String get commonTag => _commonTag;
 }
