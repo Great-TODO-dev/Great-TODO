@@ -21,7 +21,6 @@ class _TagListTaskState extends State<TagListTask> {
   @override
   Widget build(BuildContext context) {
     final tags = Provider.of<Task>(context).tags;
-    print(tags.length);
     return SizedBox(
       height: 50,
       child: ListView.builder(

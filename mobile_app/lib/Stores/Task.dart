@@ -10,14 +10,16 @@ class Task with ChangeNotifier {
   DateTime _deadline;
   List<String> _tags;
 
-  Task([this._name = '', this._description = '']) {
+  Task([this._name = '', this._description = '', this._tags]) {
     _id = null;
     _doneState = true;
-    _tags = [
-      'All',
-      'fast',
-      'hard'
-    ];
+    if (_tags == null) {
+      _tags = [
+        'All',
+        'fast',
+        'hard',
+      ];
+    }
   }
 
   set name(name) => _name = name;
@@ -44,7 +46,7 @@ class Task with ChangeNotifier {
 
   List<String> get tags => _tags;
 
-  void addTag(tag){
+  void addTag(tag) {
     if (!_tags.contains(tag)) {
       print("Tag added");
       _tags.add(tag);
@@ -52,10 +54,8 @@ class Task with ChangeNotifier {
     }
   }
 
-  void removeTag(tag){
-    if (_tags.length != 0) {
-
-    }
+  void removeTag(tag) {
+    if (_tags.length != 0) {}
   }
 
   void changeDoneState() {

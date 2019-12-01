@@ -27,14 +27,22 @@ class Tasks with ChangeNotifier {
   List<Task> get tasks {
     return [
       ..._tasks
-          .where((task) => task.tags.contains(_tags[_selectedTagId]))
+          .where((task) => task.tags.contains(tags[_selectedTagId]))
           .toList()
           .reversed
     ];
   }
 
   List<String> get tags {
-    return [..._tags];
+    List<String> buffer = [];
+    _tasks.forEach((task) {
+      task.tags.forEach((tag) {
+        if (!buffer.contains(tag)) {
+          buffer.add(tag);
+        }
+      });
+    });
+    return buffer;
   }
 
   void setSelectedTagId(int id) {
