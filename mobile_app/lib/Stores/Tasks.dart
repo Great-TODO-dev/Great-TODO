@@ -18,23 +18,23 @@ class Tasks with ChangeNotifier {
     'listview'
   ];
 
-  int _selectedTagId;
+  String _selectedTag;
 
-  Tasks([this._selectedTagId = 0]) {
+  Tasks([this._selectedTag = 'All']) {
     _forEachId();
   }
 
   List<Task> get tasks {
     return [
       ..._tasks
-          .where((task) => task.tags.contains(tags[_selectedTagId]))
+          .where((task) => task.tags.contains(_selectedTag))
           .toList()
           .reversed
     ];
   }
 
   List<String> get tags {
-    List<String> buffer = [];
+    List<String> buffer = ['All'];
     _tasks.forEach((task) {
       task.tags.forEach((tag) {
         if (!buffer.contains(tag)) {
@@ -45,21 +45,21 @@ class Tasks with ChangeNotifier {
     return buffer;
   }
 
-  void setSelectedTagId(int id) {
-    if (id == _selectedTagId) {
-      _selectedTagId = 0;
+  void setSelectedTag(String tag) {
+    if (tag == _selectedTag) {
+      _selectedTag = 'All';
     } else {
-      _selectedTagId = id;
+      _selectedTag = tag;
     }
     notifyListeners();
   }
 
   void resetSelectedTag() {
-    _selectedTagId = 0;
+    _selectedTag = 'All';
   }
 
-  int get selectedTagId {
-    return _selectedTagId;
+  String get selectedTagId {
+    return _selectedTag;
   }
 
   void _forEachId() {

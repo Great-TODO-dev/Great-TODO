@@ -11,12 +11,12 @@ class TagList extends StatefulWidget {
 
 class _TagListState extends State<TagList> {
 
-  bool _isSelectedTag(int id) {
-    return Provider.of<Tasks>(context, listen: false).selectedTagId == id;
+  bool _isSelectedTag(String tag) {
+    return Provider.of<Tasks>(context, listen: false).selectedTagId == tag;
   }
 
-  void _selectTag(int id) {
-    Provider.of<Tasks>(context, listen: false).setSelectedTagId(id);
+  void _selectTag(String tag) {
+    Provider.of<Tasks>(context, listen: false).setSelectedTag(tag);
   }
 
   @override
@@ -30,7 +30,7 @@ class _TagListState extends State<TagList> {
         itemBuilder: (BuildContext context, int i) {
           return GestureDetector(
             behavior: HitTestBehavior.deferToChild,
-            onTap: () => _selectTag(i),
+            onTap: () => _selectTag(tags[i]),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               margin: EdgeInsets.symmetric(horizontal: 10),
@@ -39,7 +39,7 @@ class _TagListState extends State<TagList> {
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                   border: Border.all(
                       width: 2,
-                      color: _isSelectedTag(i)
+                      color: _isSelectedTag(tags[i])
                           ? Colors.blue
                           : Color.fromRGBO(196, 196, 196, 1))),
               child: Column(

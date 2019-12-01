@@ -22,7 +22,7 @@ class _AddTagButtonState extends State<AddTagButton> {
   bool _isLabel = true;
 
   void _submitNewTag() {
-    Provider.of<Tasks>(context, listen: false).registerNewTag(_tag.text);
+    // Provider.of<Tasks>(context, listen: false).registerNewTag(_tag.text);
     _addNewTag(_tag.text);
     _isLabel = true;
   }
