@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class Task with ChangeNotifier {
   int _id;
@@ -9,6 +10,8 @@ class Task with ChangeNotifier {
   DateTime _date;
   DateTime _deadline;
   List<String> _tags;
+
+  Function _addNewTag;
 
   Task([this._name = '', this._description = '', this._tags]) {
     _id = null;
@@ -50,7 +53,7 @@ class Task with ChangeNotifier {
     if (!_tags.contains(tag)) {
       print("Tag added");
       _tags.add(tag);
-      // notifyListeners();
+      notifyListeners();
     }
   }
 

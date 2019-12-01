@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Stores/Task.dart';
+import '../Stores/Tasks.dart';
 
 class AddTagButton extends StatefulWidget {
   _AddTagButtonState createState() => _AddTagButtonState();
@@ -20,10 +21,11 @@ class _AddTagButtonState extends State<AddTagButton> {
 
   bool _isLabel = true;
 
-  void _submitNewTag() => setState(() {
-        _addNewTag(_tag.text);
-        _isLabel = true;
-      });
+  void _submitNewTag() {
+    Provider.of<Tasks>(context, listen: false).registerNewTag(_tag.text);
+    _addNewTag(_tag.text);
+    _isLabel = true;
+  }
 
   @override
   Widget build(BuildContext context) {
