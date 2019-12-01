@@ -48,7 +48,7 @@ class Task with ChangeNotifier {
     if (!_tags.contains(tag)) {
       print("Tag added");
       _tags.add(tag);
-      notifyListeners();
+      // notifyListeners();
     }
   }
 
