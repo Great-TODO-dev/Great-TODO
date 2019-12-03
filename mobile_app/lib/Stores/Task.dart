@@ -18,7 +18,6 @@ class Task with ChangeNotifier {
     _doneState = true;
     if (_tags == null) {
       _tags = [
-        'All',
         'fast',
         'hard',
       ];

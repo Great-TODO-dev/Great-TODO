@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Stores/Tasks.dart';
 import '../Stores/Task.dart';
 
 import '../widgets/AddTagButton.dart';
@@ -20,7 +21,15 @@ class _TagListTaskState extends State<TagListTask> {
 
   @override
   Widget build(BuildContext context) {
-    final tags = Provider.of<Task>(context).tags;
+    List<String> tags;
+
+    if (Provider.of<Task>(context, listen: false).id == null) {
+      tags = Provider.of<Tasks>(context).allTags;
+    }
+    else{
+      tags = Provider.of<Task>(context).tags;
+    }
+    
     return SizedBox(
       height: 50,
       child: ListView.builder(
