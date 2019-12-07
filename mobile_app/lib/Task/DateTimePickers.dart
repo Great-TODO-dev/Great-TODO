@@ -8,17 +8,34 @@ class DateTimePickers extends StatefulWidget {
 }
 
 class _DateTimePickersState extends State<DateTimePickers> {
+
   Future<void> _chooseDate() async {
-    final dateTime = await showDatePicker(
+    final date = await showDatePicker(
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2020),
       initialDate: DateTime.now(),
       initialDatePickerMode: DatePickerMode.day,
     );
+    if (date == null) {
+      return;
+    }
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    final resTime =
+        DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    print(resTime);
   }
 
-  // void
+  Future<void> _chooseDoDate() async {
+    await _chooseDate();
+  }
+
+  Future<void> _chooseDueDate() async{
+    await _chooseDate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +44,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
         Expanded(
           child: FlatButton(
             padding: EdgeInsets.all(0),
-            onPressed: () => _chooseDate(),
+            onPressed: () => _chooseDoDate(),
             child: Row(
               children: <Widget>[
                 Icon(
@@ -50,9 +67,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
         Expanded(
           child: FlatButton(
             padding: EdgeInsets.all(0),
-            onPressed: () {
-              print('pressed 2');
-            },
+            onPressed: () => _chooseDueDate(),
             child: Row(
               children: <Widget>[
                 Icon(
