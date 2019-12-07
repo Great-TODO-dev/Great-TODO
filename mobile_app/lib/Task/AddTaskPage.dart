@@ -7,6 +7,7 @@ import '../Stores/Task.dart';
 import '../Stores/Tasks.dart';
 
 import '../widgets/TagListTask.dart';
+import './DateTimePickers.dart';
 
 class TaskPage extends StatefulWidget {
   _TaskPageState createState() => _TaskPageState();
@@ -66,8 +67,8 @@ class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-          value: _task,
-          child: Scaffold(
+      value: _task,
+      child: Scaffold(
           backgroundColor: Colors.black,
           floatingActionButton: _needToShowCompleteButton
               ? FloatingActionButton(
@@ -109,6 +110,8 @@ class _TaskPageState extends State<TaskPage> {
                 ),
                 SizedBox(height: 20),
                 TagListTask(),
+                SizedBox(height: 20),
+                DateTimePickers(),
                 SizedBox(height: 20),
                 TextField(
                   onChanged: (_) {
