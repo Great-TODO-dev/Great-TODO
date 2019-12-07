@@ -7,6 +7,8 @@ class Locals {
   static const _name = 'Name';
   static const _description = 'Description';
   static const _commonTag = 'All';
+  static const _weeksLeft = 'weeks left';
+  static const _daysLeft = 'days left';
   const Locals();
 
   static String get today => _todaySection;
@@ -23,5 +25,9 @@ class Locals {
 
   static String get description => _description;
 
-  static  String get commonTag => _commonTag;
+  static String get commonTag => _commonTag;
+
+  static String get weeksLeft => _weeksLeft;
+
+  static String get daysLeft => _daysLeft;
 }

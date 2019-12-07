@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:provider/provider.dart';
 
 import '../Stores/Task.dart';
+import '../Locals/locals.dart';
 
 class DateTimePickers extends StatefulWidget {
   DateTimePickers();
@@ -29,7 +30,6 @@ class _DateTimePickersState extends State<DateTimePickers> {
     );
     final resTime =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
-    print(resTime);
     return resTime;
   }
 
@@ -41,6 +41,22 @@ class _DateTimePickersState extends State<DateTimePickers> {
   Future<void> _chooseDueDate() async {
     Provider.of<Task>(context, listen: false).setDeadline(await _chooseDate());
     setState(() {});
+  }
+
+  String _prepareText(DateTime deadline) {
+    final dayDelta = deadline.day - DateTime.now().day;
+    if (dayDelta == 0) {
+      return Locals.today;
+    }
+    if (dayDelta <= 7) {
+      return "$dayDelta ${Locals.daysLeft}";
+    }
+    final weeksDelta = dayDelta ~/ 7;
+    print("Days " + dayDelta.toString());
+    print("Weeks " + weeksDelta.toString());
+    if (weeksDelta <= 6) {
+      return "$weeksDelta ${Locals.weeksLeft}";
+    }
   }
 
   @override
@@ -69,13 +85,11 @@ class _DateTimePickersState extends State<DateTimePickers> {
                   style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
                 if (task.date != null)
-                IconButton(
-                  icon: Icon(Icons.close),
-                  color: Colors.white,
-                  onPressed: () => setState(() {
-                    task.clearDate();
-                  }),
-                )
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    color: Colors.white,
+                    onPressed: () => setState(() => task.clearDate()),
+                  )
               ],
             ),
           ),
@@ -93,15 +107,17 @@ class _DateTimePickersState extends State<DateTimePickers> {
                   color: Colors.blue,
                 ),
                 Text(
-                  'No date selected',
+                  task.deadline == null
+                      ? 'No date selected'
+                      : _prepareText(task.deadline),
                   style: TextStyle(color: Colors.white),
                 ),
                 if (task.deadline != null)
-                IconButton(
-                  icon: Icon(Icons.close),
-                  color: Colors.white,
-                  onPressed: () {},
-                )
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    color: Colors.white,
+                    onPressed: () => setState(() => task.clearDeadLine()),
+                  )
               ],
             ),
           ),
