@@ -13,33 +13,45 @@ class DateTimePickers extends StatefulWidget {
 }
 
 class _DateTimePickersState extends State<DateTimePickers> {
-  Future<DateTime> _chooseDate() async {
+
+  Future<void> _chooseDoDate() async {
+    final task = Provider.of<Task>(context, listen: false);
     final date = await showDatePicker(
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2020),
-      initialDate: DateTime.now(),
+      initialDate: task.date == null ? DateTime.now() : task.date,
       initialDatePickerMode: DatePickerMode.day,
     );
     if (date == null) {
-      return null;
+      return;
     }
     final time = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: task.date == null ? TimeOfDay.now() : TimeOfDay.fromDateTime(task.date),
     );
-    final resTime =
+    if (time == null) {
+      return;
+    }
+    final resDateTime =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
-    return resTime;
-  }
-
-  Future<void> _chooseDoDate() async {
-    Provider.of<Task>(context).setDate(await _chooseDate());
+    task.setDate(resDateTime);
     setState(() {});
   }
 
   Future<void> _chooseDueDate() async {
-    Provider.of<Task>(context, listen: false).setDeadline(await _chooseDate());
+    final task = Provider.of<Task>(context, listen: false);
+    final date = await showDatePicker(
+      context: context,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2020),
+      initialDate: task.deadline == null ? DateTime.now() : task.deadline,
+      initialDatePickerMode: DatePickerMode.day,
+    );
+    if (date == null) {
+      return;
+    }
+    task.setDeadline(date);
     setState(() {});
   }
 
@@ -52,11 +64,19 @@ class _DateTimePickersState extends State<DateTimePickers> {
       return "$dayDelta ${Locals.daysLeft}";
     }
     final weeksDelta = dayDelta ~/ 7;
-    print("Days " + dayDelta.toString());
-    print("Weeks " + weeksDelta.toString());
     if (weeksDelta <= 6) {
       return "$weeksDelta ${Locals.weeksLeft}";
     }
+  }
+
+  bool _isDeadlineToday(DateTime deadline) {
+    final today = DateTime.now();
+    if (today.month == deadline.month &&
+        today.day == deadline.day &&
+        today.year == deadline.year) {
+      return true;
+    }
+    return false;
   }
 
   @override
@@ -78,11 +98,13 @@ class _DateTimePickersState extends State<DateTimePickers> {
                 SizedBox(
                   width: 5,
                 ),
-                Text(
-                  task.date == null
-                      ? 'No date selected'
-                      : DateFormat('MM/dd HH:mm').format(task.date),
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                Expanded(
+                  child: Text(
+                    task.date == null
+                        ? 'No date selected'
+                        : DateFormat('MM/dd HH:mm').format(task.date),
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
                 ),
                 if (task.date != null)
                   IconButton(
@@ -104,13 +126,18 @@ class _DateTimePickersState extends State<DateTimePickers> {
                 Icon(
                   Icons.flag,
                   size: 30,
-                  color: Colors.blue,
+                  color:
+                      task.deadline != null && _isDeadlineToday(task.deadline)
+                          ? Colors.red
+                          : Colors.blue,
                 ),
-                Text(
-                  task.deadline == null
-                      ? 'No date selected'
-                      : _prepareText(task.deadline),
-                  style: TextStyle(color: Colors.white),
+                Expanded(
+                  child: Text(
+                    task.deadline == null
+                        ? 'No date selected'
+                        : _prepareText(task.deadline),
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
                 ),
                 if (task.deadline != null)
                   IconButton(
