@@ -48,6 +48,14 @@ class Task with ChangeNotifier {
 
   List<String> get tags => _tags;
 
+  void setDeadline(DateTime date) => date != null ? _deadline = date : '';
+
+  void setDate(DateTime date) => date != null ? _date = date : '';
+
+  void clearDeadLine() => _deadline = null;
+
+  void clearDate() => _date = null;
+
   void addTag(tag) {
     if (!_tags.contains(tag)) {
       _tags.add(tag);

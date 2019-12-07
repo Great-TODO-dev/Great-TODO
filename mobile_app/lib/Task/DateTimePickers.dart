@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'dart:async';
+import 'package:provider/provider.dart';
+
+import '../Stores/Task.dart';
 
 class DateTimePickers extends StatefulWidget {
   DateTimePickers();
@@ -8,8 +12,7 @@ class DateTimePickers extends StatefulWidget {
 }
 
 class _DateTimePickersState extends State<DateTimePickers> {
-
-  Future<void> _chooseDate() async {
+  Future<DateTime> _chooseDate() async {
     final date = await showDatePicker(
       context: context,
       firstDate: DateTime.now(),
@@ -18,7 +21,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
       initialDatePickerMode: DatePickerMode.day,
     );
     if (date == null) {
-      return;
+      return null;
     }
     final time = await showTimePicker(
       context: context,
@@ -27,18 +30,22 @@ class _DateTimePickersState extends State<DateTimePickers> {
     final resTime =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
     print(resTime);
+    return resTime;
   }
 
   Future<void> _chooseDoDate() async {
-    await _chooseDate();
+    Provider.of<Task>(context).setDate(await _chooseDate());
+    setState(() {});
   }
 
-  Future<void> _chooseDueDate() async{
-    await _chooseDate();
+  Future<void> _chooseDueDate() async {
+    Provider.of<Task>(context, listen: false).setDeadline(await _chooseDate());
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final task = Provider.of<Task>(context, listen: false);
     return Row(
       children: [
         Expanded(
@@ -56,8 +63,18 @@ class _DateTimePickersState extends State<DateTimePickers> {
                   width: 5,
                 ),
                 Text(
-                  'No date selected',
+                  task.date == null
+                      ? 'No date selected'
+                      : DateFormat('MM/dd HH:mm').format(task.date),
                   style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+                if (task.date != null)
+                IconButton(
+                  icon: Icon(Icons.close),
+                  color: Colors.white,
+                  onPressed: () => setState(() {
+                    task.clearDate();
+                  }),
                 )
               ],
             ),
@@ -78,6 +95,12 @@ class _DateTimePickersState extends State<DateTimePickers> {
                 Text(
                   'No date selected',
                   style: TextStyle(color: Colors.white),
+                ),
+                if (task.deadline != null)
+                IconButton(
+                  icon: Icon(Icons.close),
+                  color: Colors.white,
+                  onPressed: () {},
                 )
               ],
             ),
