@@ -3,34 +3,10 @@ let express = require('express')
 let app = express()
 const PORT = process.env.PORT
 
+var Task = require('./Task');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-var events = [
-    {
-        id: 1,
-        title: 'something to do',
-        done: true,
-        descripton: 'надо сделать дз',
-        tags: ['homework']
-        //date: Date.now,
-        //deadline:
-    },
-    {
-        id: 2,
-        title: 'do post zapros',
-        done: true,
-        descripton: 'надо сделать дз',
-        tags: ['homework']
-    },
-    {
-        id: 3,
-        title: 'do put request',
-        done: true,
-        descripton: 'надо сделать дз',
-        tags: ['homework', 'work']
-    }
-];
 
 app.get("/", function (req, res) {
     res.json({
@@ -40,37 +16,49 @@ app.get("/", function (req, res) {
 })
 
 app.get("/events", function (req, res) {
-    res.send(events);
+    res.send(Task.Tasks);
 })
 
 app.post("/events", function (req, res) {
-    var event = {
-        id: Date.now(),
-        title: req.body.title,
-        done: req.body.done,
-        descripton: req.body.descripton,
-        tags: [req.body.tags]
-        //name: req.body.name
-    };
-    events.push(event);
-    res.send(events);
+    var task =  new Task(
+        Date.now(),
+        req.body.title,
+        req.body.descripton,
+        req.body.done,
+        req.body.tags);
+    Task.Tasks.push(task);
+    res.send(Task.Tasks);
 })
 
 app.put("/events/:id", function(req, res){
-    var event = events.find(function(event){
-        return event.id === Number(req.params.id)
+    var task = Task.Tasks.find(function(task){
+        return task.id === Number(req.params.id)
     });
-    event.title = req.body.title;
-    //res.send(events)
+    task.title = req.body.title;
+    task.descripton = req.body.descripton;
+    task.done = req.body.done;
+    task.tags = req.body.tags;
+    //res.send(Task.Tasks);
     res.sendStatus(200);
 })
 
-//НЕ РАБОТАЕТ ПОКА ЧТО
-app.delete("/events/:id", function(req, res){
-    var events = events.filter(function(event){
-        return event.id !== Number(req.params.id)
+/*
+//надо еще подумать
+app.get("/events/:tag", function(req, res){
+    var new_tasks = Task.Tasks.map(function(tag){
+        if tag 
     });
-    res.send(events);
+    
+})
+ */
+
+//не работает все еще 
+app.delete("/events/:id", function(req, res){
+    var task = Task.Tasks.find(function(task){
+        return task.id === Number(req.params.id)
+    });
+    Task.Tasks.slice(Task.Tasks.indexOf(task), 1);
+    res.send(Task.Tasks);
     //res.sendStatus(200);
 })
 
