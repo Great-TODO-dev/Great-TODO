@@ -2,7 +2,7 @@ import { Sidebar } from "./Sidebar.js";
 import { chooseTab } from "./ChooseTab.js";
 
 function App(wire) {
-    wire()`
+    return wire()`
         <div class="container">
             <div class="row">
                 ${Sidebar(wire)}

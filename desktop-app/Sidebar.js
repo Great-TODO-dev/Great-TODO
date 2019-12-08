@@ -5,8 +5,8 @@
 //     render();
 // }
 
-function Sidebar(wire) {  
-    wire()`       
+function Sidebar(wire) {
+    return wire()`
         <div class="col-sm-3 sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
