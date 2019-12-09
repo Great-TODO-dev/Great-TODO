@@ -1,10 +1,10 @@
-class MainStore{
-    constructor(){
-        this._currTabName = TODAY;
+class MainStore {
+    constructor() {
+        this._currTabName = 'INBOX';
     }
     
     chnageTabName(tabName) {
-        this._currTabName = tabName
+        this._currTabName = tabName;
     }
 }
 

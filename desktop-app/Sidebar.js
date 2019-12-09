@@ -1,9 +1,11 @@
-// import { MainStore } from "./MainStore.js"
+import { MainStore } from "./MainStore.js"
+import { store } from "./index.js";
 
-// function selectToday(){
-//     MainStore.chnageTabName('Today')
-//     render();
-// }
+
+function selectTab(tabName) {
+    store.chnageTabName(tabName);
+    render();
+}
 
 function Sidebar(wire) {
     return wire()`
@@ -15,7 +17,7 @@ function Sidebar(wire) {
                     </button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-light inset_button">
+                    <button type="button" class="btn btn-light inset_button onclick=${selectTab('today')}">
                         Сегодня
                     </button>
                 </li>
