@@ -8,7 +8,6 @@ import './Stores/TodayTabStore.dart';
 
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
-import './Stores/MainStore.dart';
 import './Task/AddTaskPage.dart';
 
 void main() => runApp(App());
