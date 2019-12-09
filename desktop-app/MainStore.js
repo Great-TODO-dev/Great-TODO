@@ -1,10 +1,12 @@
+import { tabName } from "./tabName.js";
+
 class MainStore {
     constructor() {
-        this._currTabName = 'INBOX';
+        this.currTabName = tabName.INBOX;
     }
     
     chnageTabName(tabName) {
-        this._currTabName = tabName;
+        this.currTabName = tabName;
     }
 }
 

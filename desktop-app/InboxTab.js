@@ -1,6 +1,6 @@
-function Inbox(wire) {  
-    wire()`
-        <h1 class="inset_title">Входящие</h1>
+function InboxTab(wire) {  
+    return wire()`
+        <h1 class="tab_title">Входящие</h1>
         <div class="events_list">
             <div class="form-check event">
                 <input class="form-check-input" type="checkbox" id="defaultCheck1">
@@ -17,4 +17,8 @@ function Inbox(wire) {
                 <div class="event_time text-secondary">Осталось 12 дней</div>
             </div>
         </div>`
+}
+
+export {
+    InboxTab
 }

@@ -6,8 +6,13 @@ const appEl = document.getElementById("app");
 const render = bind(appEl);
 const store = new MainStore;
 
-render`${App(wire)}`
+function renderApp() {
+    render`${App(wire)}`
+}
+
+renderApp()
 
 export {
     store,
+    renderApp
 }

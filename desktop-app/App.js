@@ -6,7 +6,7 @@ function App(wire) {
         <div class="container">
             <div class="row">
                 ${Sidebar(wire)}
-                <div class="col-sm-9 inset_info">
+                <div class="col-sm-9 tab_info">
                     ${chooseTab(wire)}
                 </div>
             </div>
