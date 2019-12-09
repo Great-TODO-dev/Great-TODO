@@ -78,4 +78,14 @@ class Task with ChangeNotifier {
     }
     return;
   }
+
+  bool isDeadlineToday() {
+    final today = DateTime.now();
+    if (today.month == _deadline.month &&
+        today.day == _deadline.day &&
+        today.year == _deadline.year) {
+      return true;
+    }
+    return false;
+  }
 }

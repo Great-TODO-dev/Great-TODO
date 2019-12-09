@@ -43,7 +43,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
     final task = Provider.of<Task>(context, listen: false);
     final date = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
+      firstDate: task.deadline == null ? DateTime.now() : task.deadline.isAfter(DateTime.now()) ? DateTime.now() : task.deadline,
       lastDate: DateTime(2020),
       initialDate: task.deadline == null ? DateTime.now() : task.deadline,
       initialDatePickerMode: DatePickerMode.day,
@@ -67,16 +67,6 @@ class _DateTimePickersState extends State<DateTimePickers> {
     if (weeksDelta <= 6) {
       return "$weeksDelta ${Locals.weeksLeft}";
     }
-  }
-
-  bool _isDeadlineToday(DateTime deadline) {
-    final today = DateTime.now();
-    if (today.month == deadline.month &&
-        today.day == deadline.day &&
-        today.year == deadline.year) {
-      return true;
-    }
-    return false;
   }
 
   @override
@@ -127,7 +117,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
                   Icons.flag,
                   size: 30,
                   color:
-                      task.deadline != null && _isDeadlineToday(task.deadline)
+                      task.deadline != null && task.isDeadlineToday()
                           ? Colors.red
                           : Colors.blue,
                 ),
