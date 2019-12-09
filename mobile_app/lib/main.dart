@@ -14,8 +14,6 @@ import './Task/AddTaskPage.dart';
 void main() => runApp(App());
 
 class App extends StatelessWidget {
-  final MainStore mainStore = MainStore();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
