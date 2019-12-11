@@ -9,6 +9,7 @@ class Locals {
   static const _commonTag = 'All';
   static const _weeksLeft = 'weeks left';
   static const _daysLeft = 'days left';
+  static const _alotOfDaysLeft = 'Too much days left';
   const Locals();
 
   static String get today => _todaySection;
@@ -30,4 +31,6 @@ class Locals {
   static String get weeksLeft => _weeksLeft;
 
   static String get daysLeft => _daysLeft;
+
+  static String get alotOfDaysLeft => _alotOfDaysLeft;
 }

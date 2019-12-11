@@ -19,7 +19,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
     final date = await showDatePicker(
       context: context,
       firstDate: DateTime.now(),
-      lastDate: DateTime(2020),
+      lastDate: DateTime(2025),
       initialDate: task.date == null ? DateTime.now() : task.date,
       initialDatePickerMode: DatePickerMode.day,
     );
@@ -50,7 +50,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
           : task.deadline.isAfter(DateTime.now())
               ? DateTime.now()
               : task.deadline,
-      lastDate: DateTime(2020),
+      lastDate: DateTime(2025),
       initialDate: task.deadline == null ? DateTime.now() : task.deadline,
       initialDatePickerMode: DatePickerMode.day,
     );

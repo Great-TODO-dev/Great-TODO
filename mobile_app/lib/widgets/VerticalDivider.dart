@@ -8,7 +8,7 @@ class VerticalDivider extends CustomPainter{
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 2;
     print(size);
-    canvas.drawLine(Offset(size.height / 2, 0), Offset(size.height / 2, size.height), paint);
+    canvas.drawLine(Offset(size.width / 2, 0), Offset(size.width / 2, size.height), paint);
   }
 
   @override
