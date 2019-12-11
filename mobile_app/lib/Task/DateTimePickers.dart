@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../Stores/Task.dart';
 import '../Locals/locals.dart';
+import '../widgets/VerticalDivider.dart' as paint;
 
 class DateTimePickers extends StatefulWidget {
   DateTimePickers();
@@ -13,7 +14,6 @@ class DateTimePickers extends StatefulWidget {
 }
 
 class _DateTimePickersState extends State<DateTimePickers> {
-
   Future<void> _chooseDoDate() async {
     final task = Provider.of<Task>(context, listen: false);
     final date = await showDatePicker(
@@ -28,7 +28,9 @@ class _DateTimePickersState extends State<DateTimePickers> {
     }
     final time = await showTimePicker(
       context: context,
-      initialTime: task.date == null ? TimeOfDay.now() : TimeOfDay.fromDateTime(task.date),
+      initialTime: task.date == null
+          ? TimeOfDay.now()
+          : TimeOfDay.fromDateTime(task.date),
     );
     if (time == null) {
       return;
@@ -43,7 +45,11 @@ class _DateTimePickersState extends State<DateTimePickers> {
     final task = Provider.of<Task>(context, listen: false);
     final date = await showDatePicker(
       context: context,
-      firstDate: task.deadline == null ? DateTime.now() : task.deadline.isAfter(DateTime.now()) ? DateTime.now() : task.deadline,
+      firstDate: task.deadline == null
+          ? DateTime.now()
+          : task.deadline.isAfter(DateTime.now())
+              ? DateTime.now()
+              : task.deadline,
       lastDate: DateTime(2020),
       initialDate: task.deadline == null ? DateTime.now() : task.deadline,
       initialDatePickerMode: DatePickerMode.day,
@@ -106,7 +112,13 @@ class _DateTimePickersState extends State<DateTimePickers> {
             ),
           ),
         ),
-        VerticalDivider(color: Colors.red),
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CustomPaint(
+            painter: paint.VerticalDivider(),
+          ),
+        ),
         Expanded(
           child: FlatButton(
             padding: EdgeInsets.all(0),
@@ -116,10 +128,9 @@ class _DateTimePickersState extends State<DateTimePickers> {
                 Icon(
                   Icons.flag,
                   size: 30,
-                  color:
-                      task.deadline != null && task.isDeadlineToday()
-                          ? Colors.red
-                          : Colors.blue,
+                  color: task.deadline != null && task.isDeadlineToday()
+                      ? Colors.red
+                      : Colors.blue,
                 ),
                 Expanded(
                   child: Text(
