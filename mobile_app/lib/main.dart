@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import './Stores/Tasks.dart';
-import './Stores/TodayTabStore.dart';
+import './Stores/Tabs/BaseTabStore.dart';
+import './Stores/Tabs/TodayTabStore.dart';
 
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
@@ -15,11 +16,20 @@ void main() => runApp(App());
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    var test = TodayTabStore();
+
+    print(test is BaseTabStore);
+
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
           value: Tasks(),
         ),
+        ChangeNotifierProxyProvider<Tasks, TodayTabStore>(
+          builder: (ctx, tasks, prevTodayTabStore) => prevTodayTabStore == null ?  TodayTabStore() : TodayTabStore(tasks.todayTasks, prevTodayTabStore.selectedTag),
+        )
       ],
       child: CupertinoApp(
         localizationsDelegates: [

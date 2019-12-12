@@ -24,12 +24,12 @@ class _TagListTaskState extends State<TagListTask> {
     List<String> tags;
 
     if (Provider.of<Task>(context, listen: false).id == null) {
-      tags = Provider.of<Tasks>(context).allTags;
+      tags = Provider.of<Tasks>(context).allTags + Provider.of<Task>(context, listen: false).tags;
     }
     else{
       tags = Provider.of<Task>(context).tags;
     }
-    
+
     return SizedBox(
       height: 50,
       child: ListView.builder(
