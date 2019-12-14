@@ -20,8 +20,8 @@ class _InboxSectionState extends State<InboxSection> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {
-        Navigator.pushNamed(context, '/todayTab');
+      onTap: () {
+        Navigator.pushNamed(context, '/inboxTab');
       },
       child: Container(
         margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0, bottom: 30.0),

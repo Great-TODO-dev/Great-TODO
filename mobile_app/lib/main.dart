@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import './Stores/Tasks.dart';
-import './Stores/TodayTabStore.dart';
+import './Tabs/InboxTab/InboxTab.dart';
 
 import './Tabs/TodayTab/TodayTab.dart';
 import './HomePage/HomePage.dart';
@@ -41,7 +41,8 @@ class App extends StatelessWidget {
         routes: {
           '/': (context) => HomePage(),
           '/todayTab': (context) => TodayTab(),
-          '/task': (context) => TaskPage()
+          '/inboxTab': (context) => InboxTab(),
+          '/task': (context) => TaskPage(),
         },
       ),
     );
