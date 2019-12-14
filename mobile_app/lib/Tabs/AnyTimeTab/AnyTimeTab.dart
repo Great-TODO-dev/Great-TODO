@@ -19,6 +19,6 @@ class AnyTimeTab extends BaseTab{
 
   @override
   List<Task> tasksProxy(Tasks tasks) {
-    return tasks.inboxTasks;
+    return tasks.anyTimeTasks;
   }
 }

@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
+enum Store{
+  AnyTime,
+  SomeTime
+}
+
 class Task with ChangeNotifier {
   int _id;
   String _name;
@@ -10,11 +15,13 @@ class Task with ChangeNotifier {
   DateTime _date;
   DateTime _deadline;
   List<String> _tags;
+  Store _store;
 
   Function _addNewTag;
 
   Task([this._name = '', this._description = '', this._tags]) {
-    // TODO:remove after implementation tabs
+    store = Store.SomeTime;
+    // TODO:remove after implementation storage
     _date = DateTime.now();
     _id = null;
     _doneState = true;
@@ -36,6 +43,8 @@ class Task with ChangeNotifier {
 
   set doneState(doneState) => _doneState = doneState;
 
+  set store(newStore) => _store = newStore;
+
   String get name => _name;
 
   String get description => _description;
@@ -47,6 +56,8 @@ class Task with ChangeNotifier {
   int get id => _id;
 
   bool get doneState => _doneState;
+
+  Store get store => _store;
 
   List<String> get tags => _tags;
 

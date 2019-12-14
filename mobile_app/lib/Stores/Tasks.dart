@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
+import './TasksPreparer.dart';
 
 import '../Locals/locals.dart';
 import '../Utils/DateUtils.dart';
 
-class Tasks with ChangeNotifier {
+class Tasks with ChangeNotifier, TasksPreparer {
   List<Task> _tasks = [
     Task('Listen', 'not now'),
     Task('Kill bi', 'not now'),
@@ -94,19 +95,31 @@ class Tasks with ChangeNotifier {
   }
 
   List<Task> get todayTasks {
-    return _tasks.reversed.where((task) {
+    return tagProxy(_tasks.reversed.where((task) {
       if (task.date != null || task.deadline != null) {
         if (DateUtils.isToday(task.date) || DateUtils.isToday(task.deadline)) {
           return true;
         }
       }
       return false;
-    }).toList();
+    }).toList(), _selectedTag);
   }
 
   List<Task> get inboxTasks {
-    return _tasks.reversed
+    return tagProxy(_tasks.reversed
         .where((task) => task.date == null && task.deadline == null)
-        .toList();
+        .toList(), _selectedTag);
+  }
+
+  List<Task> get anyTimeTasks {
+    return tagProxy(_tasks.reversed
+        .where((task) => task.store == Store.AnyTime)
+        .toList(), _selectedTag);
+  }
+
+  List<Task> get someTimeTasks {
+    return tagProxy(_tasks.reversed
+        .where((task) => task.store == Store.SomeTime)
+        .toList(), _selectedTag);
   }
 }
