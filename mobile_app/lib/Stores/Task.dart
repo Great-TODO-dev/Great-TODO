@@ -14,6 +14,8 @@ class Task with ChangeNotifier {
   Function _addNewTag;
 
   Task([this._name = '', this._description = '', this._tags]) {
+    // TODO:remove after implementation tabs
+    _date = DateTime.now();
     _id = null;
     _doneState = true;
     if (_tags == null) {

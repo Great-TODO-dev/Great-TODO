@@ -42,7 +42,7 @@ class _TodayTabState extends State<TodayTab> {
 
   @override
   Widget build(BuildContext context) {
-    final tasks = Provider.of<Tasks>(context).tasks;
+    final tasks = Provider.of<Tasks>(context).todayTasks;
     return CupertinoPageScaffold(
       backgroundColor: Colors.black,
       navigationBar: CupertinoNavigationBar(

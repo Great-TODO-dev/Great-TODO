@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
+
 import '../Locals/locals.dart';
+import '../Utils/DateUtils.dart';
 
 class Tasks with ChangeNotifier {
   List<Task> _tasks = [
@@ -43,7 +45,7 @@ class Tasks with ChangeNotifier {
     return buffer;
   }
 
-  List<String> get allTags{
+  List<String> get allTags {
     List<String> buffer = [];
     _tasks.forEach((task) {
       task.tags.forEach((tag) {
@@ -88,5 +90,23 @@ class Tasks with ChangeNotifier {
   addTask(Task task) {
     task.setId(_tasks.length);
     _tasks.add(task);
+    notifyListeners();
+  }
+
+  List<Task> get todayTasks {
+    return _tasks.reversed.where((task) {
+      if (task.date != null || task.deadline != null) {
+        if (DateUtils.isToday(task.date) || DateUtils.isToday(task.deadline)) {
+          return true;
+        }
+      }
+      return false;
+    }).toList();
+  }
+
+  List<Task> get inboxTasks {
+    return _tasks.reversed
+        .where((task) => task.date == null && task.deadline == null)
+        .toList();
   }
 }
