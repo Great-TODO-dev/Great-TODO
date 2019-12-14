@@ -8,7 +8,6 @@ import './TodayTitle.dart';
 import '../../widgets/common/TagsList.dart';
 
 import '../../Stores/Tasks.dart';
-import '../../Stores/Tabs/BaseTabStore.dart';
 
 class TodayTab extends StatefulWidget {
   @override
@@ -24,9 +23,9 @@ class _TodayTabState extends State<TodayTab> {
 
   @override
   void didChangeDependencies() {
-    // if (_resetSelectedTag == null) {
-    //   _resetSelectedTag = Provider.of<Tasks>(context, listen: false).resetSelectedTag;
-    // }
+    if (_resetSelectedTag == null) {
+      _resetSelectedTag = Provider.of<Tasks>(context, listen: false).resetSelectedTag;
+    }
     super.didChangeDependencies();
   }
 
@@ -43,7 +42,7 @@ class _TodayTabState extends State<TodayTab> {
 
   @override
   Widget build(BuildContext context) {
-    final tasks = Provider.of<BaseTabStore>(context).tasks;
+    final tasks = Provider.of<Tasks>(context).tasks;
     return CupertinoPageScaffold(
       backgroundColor: Colors.black,
       navigationBar: CupertinoNavigationBar(

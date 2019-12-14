@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
-
 import '../Locals/locals.dart';
-import '../Utils/DateUtils.dart';
 
 class Tasks with ChangeNotifier {
   List<Task> _tasks = [
@@ -11,8 +9,38 @@ class Tasks with ChangeNotifier {
     Task('Kill bi', 'not now'),
     Task('Interpolate string', 'not now'),
   ];
-  Tasks() {
+
+  String _selectedTag;
+
+  Tasks([this._selectedTag]) {
     _forEachId();
+    if (_selectedTag == null) {
+      _selectedTag = Locals.commonTag;
+    }
+  }
+
+  List<Task> get tasks {
+    if (_selectedTag == Locals.commonTag) {
+      return [..._tasks.reversed];
+    }
+    return [
+      ..._tasks
+          .where((task) => task.tags.contains(_selectedTag))
+          .toList()
+          .reversed
+    ];
+  }
+
+  List<String> get tags {
+    List<String> buffer = [Locals.commonTag];
+    _tasks.forEach((task) {
+      task.tags.forEach((tag) {
+        if (!buffer.contains(tag)) {
+          buffer.add(tag);
+        }
+      });
+    });
+    return buffer;
   }
 
   List<String> get allTags{
@@ -27,16 +55,21 @@ class Tasks with ChangeNotifier {
     return buffer;
   }
 
-  List<Task> get todayTasks{
-    return _tasks.where((task) {
-      if (task.date == null && task.deadline == null) {
-        return true;
-      }
-      if (DateUtils.isToday(task.date) || DateUtils.isToday(task.deadline)) {
-        return true;
-      }
-      return false;
-    }).toList();
+  void setSelectedTag(String tag) {
+    if (tag == _selectedTag) {
+      _selectedTag = Locals.commonTag;
+    } else {
+      _selectedTag = tag;
+    }
+    notifyListeners();
+  }
+
+  void resetSelectedTag() {
+    _selectedTag = Locals.commonTag;
+  }
+
+  String get selectedTagId {
+    return _selectedTag;
   }
 
   void _forEachId() {
@@ -48,6 +81,7 @@ class Tasks with ChangeNotifier {
 
   void removeSingleTask(int id) {
     _tasks.removeWhere((task) => task.id == id);
+    resetSelectedTag();
     notifyListeners();
   }
 
