@@ -18,6 +18,8 @@ class _TaskPageState extends State<TaskPage> {
   final TextEditingController taskDescription = TextEditingController();
   Task _task;
 
+  bool _needToShowStoreChange = false;
+
   _TaskPageState();
 
   void _validateTask() {
@@ -64,6 +66,10 @@ class _TaskPageState extends State<TaskPage> {
     return taskName.text != '' || taskDescription.text != '';
   }
 
+  void _showStorageChoose() => setState(() {
+        _needToShowStoreChange = true;
+      });
+
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
@@ -82,18 +88,35 @@ class _TaskPageState extends State<TaskPage> {
                   )
                 : Container(),
             appBar: CupertinoNavigationBar(
+              backgroundColor: Colors.black45,
               transitionBetweenRoutes: true,
-              trailing: _task.id != null
-                  ? CupertinoButton(
-                      onPressed: () => _removeTask(),
+              trailing: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FittedBox(
+                    child: CupertinoButton(
+                      onPressed: () => _showStorageChoose(),
                       child: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                        size: 30,
+                        Icons.storage,
+                        color: Colors.blue,
+                        size: 50,
+                      ),
+                    ),
+                  ),
+                  if (_task.id != null)
+                    FittedBox(
+                      child: CupertinoButton(
+                        onPressed: () => _removeTask(),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                          size: 50,
+                        ),
                       ),
                     )
-                  : Container(),
-              backgroundColor: Colors.black45,
+                ],
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -133,74 +156,92 @@ class _TaskPageState extends State<TaskPage> {
                 ],
               ),
             )),
-        GestureDetector(
-          onTap: () {
-          },
-          child: Scaffold(
-            backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
-            body: Center(
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(64, 59, 59, 1),
-                      borderRadius: BorderRadius.circular(15.0),
-                      border: Border.all(
-                        width: 1,
-                      )),
-                  padding: EdgeInsets.only(top: 15, bottom: 15, left: 10),
-                  height: deviceSize.height / 4,
-                  width: deviceSize.width / 1.5,
-                  constraints: BoxConstraints(
-                      minHeight: deviceSize.height / 4,
-                      minWidth: deviceSize.width / 1.5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        Locals.moveTaskToStore,
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                      SizedBox(height: 10,),
-                      FlatButton(
-                        padding: EdgeInsets.zero,
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Text(
-                              Locals.someTime,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30),
+        if (_needToShowStoreChange)
+          GestureDetector(
+            onTap: () => setState(() {
+              _needToShowStoreChange = false;
+            }),
+            child: Scaffold(
+              backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
+              body: Center(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(64, 59, 59, 1),
+                        borderRadius: BorderRadius.circular(15.0),
+                        border: Border.all(
+                          width: 1,
+                        )),
+                    padding: EdgeInsets.only(
+                        top: 15, bottom: 10, left: 10, right: 10),
+                    height: deviceSize.height / 4,
+                    width: deviceSize.width / 1.5,
+                    constraints: BoxConstraints(
+                        minHeight: deviceSize.height / 4,
+                        minWidth: deviceSize.width / 1.5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          Locals.moveTaskToStore,
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        FlatButton(
+                            onPressed: () {},
+                            padding: EdgeInsets.zero,
+                            child: Flex(
+                              direction: Axis.horizontal,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 3),
+                                    decoration: BoxDecoration(
+                                        color: _task.store == Store.SomeTime ?  Colors.blue : Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Text(
+                                      Locals.someTime,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 30),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             )),
-                            Checkbox(
-                              value: true,
-                            )
-                          ],
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          print("Pressed on button");
-                        },
-                        padding: EdgeInsets.zero,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                Locals.anyTime,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 30),
-                              ),
-                            ),
-                            Checkbox(
-                              value: true,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )),
+                        FlatButton(
+                            onPressed: () {},
+                            padding: EdgeInsets.zero,
+                            child: Flex(
+                              direction: Axis.horizontal,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 3),
+                                    decoration: BoxDecoration(
+                                        color: _task.store == Store.AnyTime ?  Colors.blue : Colors.transparent,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Text(
+                                      Locals.anyTime,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 30),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    )),
+              ),
             ),
           ),
-        ),
       ]),
     );
   }
