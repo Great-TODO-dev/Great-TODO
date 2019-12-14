@@ -66,71 +66,142 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size deviceSize = MediaQuery.of(context).size;
     return ChangeNotifierProvider.value(
       value: _task,
-      child: Scaffold(
-          backgroundColor: Colors.black,
-          floatingActionButton: _needToShowCompleteButton
-              ? FloatingActionButton(
-                  onPressed: () => _validateTask(),
-                  child: Icon(
-                    Icons.done,
-                    size: 40,
-                  ),
-                )
-              : Container(),
-          appBar: CupertinoNavigationBar(
-            transitionBetweenRoutes: true,
-            trailing: _task.id != null
-                ? CupertinoButton(
-                    onPressed: () => _removeTask(),
+      child: Stack(children: [
+        Scaffold(
+            backgroundColor: Colors.black,
+            floatingActionButton: _needToShowCompleteButton
+                ? FloatingActionButton(
+                    onPressed: () => _validateTask(),
                     child: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                      size: 30,
+                      Icons.done,
+                      size: 40,
                     ),
                   )
                 : Container(),
-            backgroundColor: Colors.black45,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                TextField(
-                  controller: taskName,
-                  showCursor: true,
-                  style: TextStyle(color: Colors.white, fontSize: 28),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: Locals.name,
-                    hintStyle:
-                        TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                  ),
-                ),
-                SizedBox(height: 20),
-                TagListTask(),
-                SizedBox(height: 20),
-                DateTimePickers(),
-                SizedBox(height: 20),
-                TextField(
-                  onChanged: (_) {
-                    setState(() {});
-                  },
-                  maxLines: null,
-                  controller: taskDescription,
-                  showCursor: true,
-                  style: TextStyle(color: Colors.white, fontSize: 30),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: Locals.description,
-                    hintStyle:
-                        TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                  ),
-                )
-              ],
+            appBar: CupertinoNavigationBar(
+              transitionBetweenRoutes: true,
+              trailing: _task.id != null
+                  ? CupertinoButton(
+                      onPressed: () => _removeTask(),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 30,
+                      ),
+                    )
+                  : Container(),
+              backgroundColor: Colors.black45,
             ),
-          )),
+            body: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: taskName,
+                    showCursor: true,
+                    style: TextStyle(color: Colors.white, fontSize: 28),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: Locals.name,
+                      hintStyle:
+                          TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TagListTask(),
+                  SizedBox(height: 20),
+                  DateTimePickers(),
+                  SizedBox(height: 20),
+                  TextField(
+                    onChanged: (_) {
+                      setState(() {});
+                    },
+                    maxLines: null,
+                    controller: taskDescription,
+                    showCursor: true,
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: Locals.description,
+                      hintStyle:
+                          TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+                    ),
+                  )
+                ],
+              ),
+            )),
+        GestureDetector(
+          onTap: () {
+          },
+          child: Scaffold(
+            backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
+            body: Center(
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(64, 59, 59, 1),
+                      borderRadius: BorderRadius.circular(15.0),
+                      border: Border.all(
+                        width: 1,
+                      )),
+                  padding: EdgeInsets.only(top: 15, bottom: 15, left: 10),
+                  height: deviceSize.height / 4,
+                  width: deviceSize.width / 1.5,
+                  constraints: BoxConstraints(
+                      minHeight: deviceSize.height / 4,
+                      minWidth: deviceSize.width / 1.5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Locals.moveTaskToStore,
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      SizedBox(height: 10,),
+                      FlatButton(
+                        padding: EdgeInsets.zero,
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Text(
+                              Locals.someTime,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30),
+                            )),
+                            Checkbox(
+                              value: true,
+                            )
+                          ],
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          print("Pressed on button");
+                        },
+                        padding: EdgeInsets.zero,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                Locals.anyTime,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 30),
+                              ),
+                            ),
+                            Checkbox(
+                              value: true,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }
