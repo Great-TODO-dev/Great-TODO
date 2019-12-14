@@ -6,8 +6,6 @@ import './section.dart';
 import '../Locals/locals.dart';
 
 class HomePage extends StatelessWidget {
-  final NAME = 'Name doesn`t matter';
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(

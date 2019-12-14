@@ -4,9 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import './Stores/Tasks.dart';
-import './Tabs/InboxTab/InboxTab.dart';
 
+import './Tabs/InboxTab/InboxTab.dart';
 import './Tabs/TodayTab/TodayTab.dart';
+import './Tabs/SomeTimeTab/SomeTimeTab.dart';
+import './Tabs/AnyTimeTab/AnyTimeTab.dart';
+
 import './HomePage/HomePage.dart';
 import './Task/AddTaskPage.dart';
 
@@ -40,8 +43,10 @@ class App extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => HomePage(),
-          '/todayTab': (context) => TodayTab(),
-          '/inboxTab': (context) => InboxTab(),
+          TodayTab.routeName: (context) => TodayTab(),
+          InboxTab.routeName: (context) => InboxTab(),
+          AnyTimeTab.routeName: (context) => AnyTimeTab(),
+          SomeTimeTab.routeName: (context) => SomeTimeTab(),
           '/task': (context) => TaskPage(),
         },
       ),

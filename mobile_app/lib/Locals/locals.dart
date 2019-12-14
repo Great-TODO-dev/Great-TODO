@@ -1,36 +1,14 @@
 class Locals {
-  static const _todaySection = 'Today';
-  static const _upComing = 'Upcoming';
-  static const _anyTime = 'AnyTime';
-  static const _someTime = 'SomeTime';
-  static const _inbox = 'Inbox';
-  static const _name = 'Name';
-  static const _description = 'Description';
-  static const _commonTag = 'All';
-  static const _weeksLeft = 'weeks left';
-  static const _daysLeft = 'days left';
-  static const _alotOfDaysLeft = 'Too much days left';
+  static const today = 'Today';
+  static const upComing = 'Upcoming';
+  static const anyTime = 'AnyTime';
+  static const someTime = 'SomeTime';
+  static const inbox = 'Inbox';
+  static const name = 'Name';
+  static const description = 'Description';
+  static const commonTag = 'All';
+  static const weeksLeft = 'weeks left';
+  static const daysLeft = 'days left';
+  static const alotOfDaysLeft = 'Too much days left';
   const Locals();
-
-  static String get today => _todaySection;
-
-  static String get upComing => _upComing;
-
-  static String get anyTime => _anyTime;
-
-  static String get someTime => _someTime;
-
-  static String get inbox => _inbox;
-
-  static String get name => _name;
-
-  static String get description => _description;
-
-  static String get commonTag => _commonTag;
-
-  static String get weeksLeft => _weeksLeft;
-
-  static String get daysLeft => _daysLeft;
-
-  static String get alotOfDaysLeft => _alotOfDaysLeft;
 }

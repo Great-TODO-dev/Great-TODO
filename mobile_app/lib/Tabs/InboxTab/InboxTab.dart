@@ -10,6 +10,8 @@ import '../BaseTab.dart';
 
 
 class InboxTab extends BaseTab{
+  static final routeName = '/inboxTab';
+
   @override
   Widget title() {
     return InboxTitle();

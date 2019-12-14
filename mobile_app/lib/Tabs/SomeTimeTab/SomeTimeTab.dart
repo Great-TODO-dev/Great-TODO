@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-import './TodayTitle.dart';
+import './SomeTimeTitle.dart';
 
 import '../../Stores/Tasks.dart';
 import '../../Stores/Task.dart';
 
 import '../BaseTab.dart';
 
-class TodayTab extends BaseTab {
-  static final routeName = '/todayTab';
+
+
+class SomeTimeTab extends BaseTab{
+  static final routeName = '/someTimeTab';
 
   @override
   Widget title() {
-    return TodayTitle();
+    return SomeTimeTitle();
   }
 
   @override
   List<Task> tasksProxy(Tasks tasks) {
-    return tasks.todayTasks;
+    return tasks.inboxTasks;
   }
 }

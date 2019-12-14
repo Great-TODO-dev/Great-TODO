@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../Locals/locals.dart';
+
+import '../Tabs/InboxTab/InboxTab.dart';
+import '../Tabs/TodayTab/TodayTab.dart';
+import '../Tabs/SomeTimeTab/SomeTimeTab.dart';
+import '../Tabs/AnyTimeTab/AnyTimeTab.dart';
+
 class Section extends StatelessWidget {
   final String name;
   final String count;
@@ -11,8 +18,14 @@ class Section extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         switch (name) {
-          case 'Today':
-            Navigator.pushNamed(context, '/todayTab');
+          case Locals.today:
+            Navigator.pushNamed(context, TodayTab.routeName);
+            break;
+          case Locals.anyTime:
+            Navigator.pushNamed(context, AnyTimeTab.routeName);
+            break;
+          case Locals.someTime:
+            Navigator.pushNamed(context, SomeTimeTab.routeName);
             break;
           default:
         }
