@@ -70,6 +70,15 @@ class _TaskPageState extends State<TaskPage> {
         _needToShowStoreChange = true;
       });
 
+  void _submitStore(Store store){
+    if (_task.store == store) {
+      store = null;
+    }
+    _task.store = store;
+    _needToShowStoreChange = false;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
@@ -194,7 +203,7 @@ class _TaskPageState extends State<TaskPage> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
-                            onPressed: () {},
+                            onPressed: () => _submitStore(Store.SomeTime),
                             padding: EdgeInsets.zero,
                             child: Flex(
                               direction: Axis.horizontal,
@@ -218,7 +227,7 @@ class _TaskPageState extends State<TaskPage> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
-                            onPressed: () {},
+                            onPressed: () => _submitStore(Store.AnyTime),
                             padding: EdgeInsets.zero,
                             child: Flex(
                               direction: Axis.horizontal,
