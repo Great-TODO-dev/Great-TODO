@@ -189,24 +189,22 @@ class _TaskPageState extends State<TaskPage> {
                           height: 15,
                         ),
                         FlatButton(
+                            color: _task.store == Store.SomeTime
+                                ? Colors.blue
+                                : Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
                             onPressed: () {},
                             padding: EdgeInsets.zero,
                             child: Flex(
                               direction: Axis.horizontal,
                               children: [
                                 Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 3),
-                                    decoration: BoxDecoration(
-                                        color: _task.store == Store.SomeTime ?  Colors.blue : Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: Text(
-                                      Locals.someTime,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30),
-                                    ),
+                                  child: Text(
+                                    Locals.someTime,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 30),
                                   ),
                                 ),
                               ],
@@ -215,24 +213,22 @@ class _TaskPageState extends State<TaskPage> {
                           height: 10,
                         ),
                         FlatButton(
+                            color: _task.store == Store.AnyTime
+                                ? Colors.blue
+                                : Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
                             onPressed: () {},
                             padding: EdgeInsets.zero,
                             child: Flex(
                               direction: Axis.horizontal,
                               children: [
                                 Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(vertical: 3),
-                                    decoration: BoxDecoration(
-                                        color: _task.store == Store.AnyTime ?  Colors.blue : Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: Text(
-                                      Locals.anyTime,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30),
-                                    ),
+                                  child: Text(
+                                    Locals.anyTime,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 30),
                                   ),
                                 ),
                               ],
