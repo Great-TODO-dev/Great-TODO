@@ -2,15 +2,16 @@ import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
 import './TasksPreparer.dart';
+import '../Repository/Repository.dart';
 
 import '../Locals/locals.dart';
 import '../Utils/DateUtils.dart';
 
-class Tasks with ChangeNotifier, TasksPreparer {
+class Tasks with ChangeNotifier, TasksPreparer, Repository {
   List<Task> _tasks = [
-    Task('Listen', 'not now'),
-    Task('Kill bi', 'not now'),
-    Task('Interpolate string', 'not now'),
+    Task(id: 250, name: 'Listen', description: 'not now'),
+    Task(id: 251, name: 'Kill bi', description: 'not now'),
+    Task(id: 252, name: 'Interpolate string', description: 'not now'),
   ];
 
   String _selectedTag;
@@ -91,35 +92,52 @@ class Tasks with ChangeNotifier, TasksPreparer {
   addTask(Task task) {
     task.setId(_tasks.length);
     _tasks.add(task);
+    Repository.insertDataInDb(task);
     notifyListeners();
   }
 
+  Future<void> updateTasks() async {
+    final tasks = await Repository.getDataFromDb();
+    print(tasks);
+    _tasks.addAll(tasks
+        .map((item) => Task(
+            id: item['id'],
+            name: item['name'],
+            description: item['description']))
+        .toList());
+  }
+
   List<Task> get todayTasks {
-    return tagProxy(_tasks.reversed.where((task) {
-      if (task.date != null || task.deadline != null) {
-        if (DateUtils.isToday(task.date) || DateUtils.isToday(task.deadline)) {
-          return true;
-        }
-      }
-      return false;
-    }).toList(), _selectedTag);
+    return tagProxy(
+        _tasks.reversed.where((task) {
+          if (task.date != null || task.deadline != null) {
+            if (DateUtils.isToday(task.date) ||
+                DateUtils.isToday(task.deadline)) {
+              return true;
+            }
+          }
+          return false;
+        }).toList(),
+        _selectedTag);
   }
 
   List<Task> get inboxTasks {
-    return tagProxy(_tasks.reversed
-        .where((task) => task.date == null && task.deadline == null)
-        .toList(), _selectedTag);
+    return tagProxy(
+        _tasks.reversed
+            .where((task) => task.date == null && task.deadline == null)
+            .toList(),
+        _selectedTag);
   }
 
   List<Task> get anyTimeTasks {
-    return tagProxy(_tasks.reversed
-        .where((task) => task.store == Store.AnyTime)
-        .toList(), _selectedTag);
+    return tagProxy(
+        _tasks.reversed.where((task) => task.store == Store.AnyTime).toList(),
+        _selectedTag);
   }
 
   List<Task> get someTimeTasks {
-    return tagProxy(_tasks.reversed
-        .where((task) => task.store == Store.SomeTime)
-        .toList(), _selectedTag);
+    return tagProxy(
+        _tasks.reversed.where((task) => task.store == Store.SomeTime).toList(),
+        _selectedTag);
   }
 }

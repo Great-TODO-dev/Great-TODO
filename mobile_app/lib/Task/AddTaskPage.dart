@@ -27,7 +27,7 @@ class _TaskPageState extends State<TaskPage> {
       String name = taskName.text;
       String description = taskDescription.text;
       List<String> tags = _task.tags;
-      Task task = new Task(name, description, tags);
+      Task task = new Task(name: name, description: description,tags: tags);
       Provider.of<Tasks>(context, listen: false).addTask(task);
       Navigator.pop(context);
       return;

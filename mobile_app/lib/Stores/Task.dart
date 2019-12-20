@@ -17,13 +17,16 @@ class Task with ChangeNotifier {
   List<String> _tags;
   Store _store;
 
-  Function _addNewTag;
+  Task({id = -1, name = '', description = '', List<String> tags = const [], date, deadLine, store}) {
+    this._id = id;
+    this._name = name;
+    this._description = description;
+    this._tags = tags;
+    this._date = date == null ? null : date;
+    this._deadline = deadLine == null ? null : deadLine;
+    this._store = store == null ? null : store;
 
-  Task([this._name = '', this._description = '', this._tags]) {
-    store = Store.SomeTime;
-    // TODO:remove after implementation storage
     _date = DateTime.now();
-    _id = null;
     _doneState = true;
     if (_tags == null) {
       _tags = [
