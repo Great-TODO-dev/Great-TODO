@@ -45,18 +45,10 @@ class Task with ChangeNotifier {
     this._name = name;
     this._description = description;
     this._tags = tags;
-    this._date = date == null ? null : date;
+    this._date = date;
     this._deadline = deadLine == null ? null : deadLine;
     this._store = store == null ? null : store;
-
-    _date = DateTime.now();
     _doneState = true;
-    if (_tags == null) {
-      _tags = [
-        'fast',
-        'hard',
-      ];
-    }
   }
 
   set name(name) => _name = name;

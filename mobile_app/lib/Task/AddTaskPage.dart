@@ -16,44 +16,24 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   final TextEditingController taskName = TextEditingController();
   final TextEditingController taskDescription = TextEditingController();
-  Task _task;
+  Task _task = new Task();
 
   bool _needToShowStoreChange = false;
 
   _TaskPageState();
 
   void _validateTask() {
-    if (_task.id == null) {
-      String name = taskName.text;
-      String description = taskDescription.text;
-      List<String> tags = _task.tags;
-      Task task = new Task(name: name, description: description,tags: tags);
-      Provider.of<Tasks>(context, listen: false).addTask(task);
-      Navigator.pop(context);
-      return;
-    }
-
-    _task.name = taskName.text;
-    _task.description = taskDescription.text;
-    Provider.of<Tasks>(context, listen: false).updateTask(_task.id);
+    String name = taskName.text;
+    String description = taskDescription.text;
+    _task.name = name;
+    _task.description = description;
+    Provider.of<Tasks>(context, listen: false).addTask(_task);
     Navigator.pop(context);
   }
 
   void _removeTask() {
     Provider.of<Tasks>(context, listen: false).removeSingleTask(_task.id);
     Navigator.pop(context);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _task = ModalRoute.of(context).settings?.arguments == null
-        ? new Task()
-        : ModalRoute.of(context).settings.arguments as Task;
-    if (_task.id != null) {
-      taskName.text = _task.name;
-      taskDescription.text = _task.description;
-    }
   }
 
   @override
@@ -71,7 +51,7 @@ class _TaskPageState extends State<TaskPage> {
         _needToShowStoreChange = true;
       });
 
-  void _submitStore(Store store){
+  void _submitStore(Store store) {
     if (_task.store == store) {
       store = null;
     }

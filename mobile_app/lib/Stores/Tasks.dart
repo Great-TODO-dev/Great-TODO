@@ -100,7 +100,6 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
 
   Future<void> updateTasks() async {
     final tasks = await Repository.getTasks();
-    print(tasks);
     try {
       _tasks.addAll(tasks
         .map((item) => Task(
