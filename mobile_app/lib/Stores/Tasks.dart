@@ -118,6 +118,10 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
     }
   }
 
+  Future<void> updateTask(int id) async{
+    await Repository.updateTask(_tasks.firstWhere((task) => task.id == id));
+  }
+
   List<Task> get todayTasks {
     return tagProxy(
         _tasks.reversed.where((task) {

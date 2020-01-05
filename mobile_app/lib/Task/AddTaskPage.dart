@@ -35,6 +35,7 @@ class _TaskPageState extends State<TaskPage> {
 
     _task.name = taskName.text;
     _task.description = taskDescription.text;
+    Provider.of<Tasks>(context, listen: false).updateTask(_task.id);
     Navigator.pop(context);
   }
 
