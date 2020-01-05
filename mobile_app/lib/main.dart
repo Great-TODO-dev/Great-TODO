@@ -12,6 +12,7 @@ import './Tabs/AnyTimeTab/AnyTimeTab.dart';
 
 import './HomePage/HomePage.dart';
 import './Task/AddTaskPage.dart';
+import './Task/EditTaskPage.dart';
 
 void main() => runApp(App());
 
@@ -48,6 +49,7 @@ class App extends StatelessWidget {
           AnyTimeTab.routeName: (context) => AnyTimeTab(),
           SomeTimeTab.routeName: (context) => SomeTimeTab(),
           '/task': (context) => TaskPage(),
+          EditTaskPage.routeName : (context) => EditTaskPage()
         },
       ),
     );

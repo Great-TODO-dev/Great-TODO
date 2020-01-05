@@ -5,13 +5,15 @@ import 'package:provider/provider.dart';
 
 import '../Stores/Task.dart';
 
+import './EditTaskPage.dart';
+
 class TaskLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final task = Provider.of<Task>(context);
     return FlatButton(
       onPressed: () {
-        Navigator.of(context).pushNamed('/task', arguments: task);
+        Navigator.of(context).pushNamed(EditTaskPage.routeName, arguments: task);
       },
       child: Container(
         padding: EdgeInsets.only(right: 15),
