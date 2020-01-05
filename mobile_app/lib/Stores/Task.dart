@@ -1,9 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-enum Store{
-  AnyTime,
-  SomeTime
+import '../Locals/locals.dart';
+
+enum Store { AnyTime, SomeTime }
+
+extension StoreExt on Store{
+
+  String get toStr {
+    switch (this) {
+      case Store.AnyTime:
+        return Locals.anyTime;
+        break;
+
+      case Store.SomeTime:
+        return Locals.someTime;
+        break;
+      default:
+        return null.toString();
+    }
+  }
 }
 
 class Task with ChangeNotifier {
@@ -17,7 +33,14 @@ class Task with ChangeNotifier {
   List<String> _tags;
   Store _store;
 
-  Task({id = -1, name = '', description = '', List<String> tags = const [], date, deadLine, store}) {
+  Task(
+      {id,
+      name = '',
+      description = '',
+      List<String> tags = const [],
+      date,
+      deadLine,
+      store}) {
     this._id = id;
     this._name = name;
     this._description = description;
@@ -103,5 +126,33 @@ class Task with ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  static Store parseStore(String store){
+    switch (store) {
+        case Locals.anyTime:
+          return Store.AnyTime;
+          break;
+
+        case Locals.someTime:
+          return Store.SomeTime;
+          break;
+      default:
+        return null;
+    }
+  }
+
+  String storeToString(){
+    switch (store) {
+      case Store.AnyTime:
+        return Locals.anyTime;
+        break;
+
+      case Store.SomeTime:
+        return Locals.someTime;
+        break;
+      default:
+        return null.toString();
+    }
   }
 }

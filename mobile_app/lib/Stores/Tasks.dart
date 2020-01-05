@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 import './Task.dart';
@@ -9,9 +11,9 @@ import '../Utils/DateUtils.dart';
 
 class Tasks with ChangeNotifier, TasksPreparer, Repository {
   List<Task> _tasks = [
-    Task(id: 250, name: 'Listen', description: 'not now'),
-    Task(id: 251, name: 'Kill bi', description: 'not now'),
-    Task(id: 252, name: 'Interpolate string', description: 'not now'),
+    // Task(id: 250, name: 'Listen', description: 'not now'),
+    // Task(id: 251, name: 'Kill bi', description: 'not now'),
+    // Task(id: 252, name: 'Interpolate string', description: 'not now'),
   ];
 
   String _selectedTag;
@@ -92,19 +94,28 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
   addTask(Task task) {
     task.setId(_tasks.length);
     _tasks.add(task);
-    Repository.insertDataInDb(task);
+    Repository.insertTask(task);
     notifyListeners();
   }
 
   Future<void> updateTasks() async {
-    final tasks = await Repository.getDataFromDb();
+    final tasks = await Repository.getTasks();
     print(tasks);
-    _tasks.addAll(tasks
+    try {
+      _tasks.addAll(tasks
         .map((item) => Task(
-            id: item['id'],
-            name: item['name'],
-            description: item['description']))
-        .toList());
+              id: item['id'],
+              name: item['name'],
+              tags: json.decode(item['tags']).cast<String>(),
+              description: item['description'],
+              date: item['date'] == 'null' ? null :  DateTime.parse(item['date']),
+              deadLine: item['deadline'] == 'null' ? null : DateTime.parse(item['deadline']),
+              store: Task.parseStore(item['store'])
+            )).toList()
+        );
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<Task> get todayTasks {
