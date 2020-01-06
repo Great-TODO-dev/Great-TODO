@@ -6,8 +6,10 @@ import '../../Locals/locals.dart';
 
 import '../../Task/TaskLabel.dart';
 
+import '../../Utils/DateUtils.dart';
+
 class TasksSection extends StatelessWidget {
-  final int _date;
+  final DateTime _date;
   final List<Task> _tasks;
 
   const TasksSection(this._date, this._tasks);
@@ -23,13 +25,13 @@ class TasksSection extends StatelessWidget {
             padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
             child: Row(children: [
               Text(
-                _date.toString(),
+                DateUtils.prepareDateToString(_date),
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
               SizedBox(
                 width: 15,
               ),
-              if (DateTime.now().day == _date)
+              if (DateUtils.isToday(_date))
                 Text(
                   Locals.today,
                   style: TextStyle(color: Colors.white, fontSize: 25),

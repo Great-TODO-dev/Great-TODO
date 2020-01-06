@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import './Task.dart';
 import '../Locals/locals.dart';
 
@@ -17,14 +19,19 @@ mixin TasksPreparer {
     return tasks.reversed.where((task) => task.store == Store.AnyTime).toList();
   }
 
-  Map<int, List<Task>> sortTasksForDays(List<Task> tasks){
-    Map<int, List<Task>> result = {};
+  Map<DateTime, List<Task>> sortTasksForDays(List<Task> tasks){
+    DateFormat format = DateFormat("yyyy mm dd");
+    Map<DateTime, List<Task>> result = {};
+
     tasks.forEach((task) {
       if (task.date != null) {
-        result.containsKey(task.date.day) ? result[task.date.day] += [task] : result[task.date.day] = [task];
+        final formatDate = format.parse("${task.date.year} ${task.date.month} ${task.date.day}");
+        print(formatDate);
+        result.containsKey(formatDate) ? result[formatDate] += [task] : result[formatDate] = [task];
       }
       if (task.deadline != null) {
-        result.containsKey(task.deadline.day) ? result[task.deadline.day] += [task] : result[task.deadline.day] = [task];
+        final formatDate = format.parse("${task.deadline.year} ${task.deadline.month} ${task.deadline.day}");
+        result.containsKey(formatDate) ? result[formatDate] += [task] : result[formatDate] = [task];
       }
     });
     return result;

@@ -155,7 +155,7 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
         _selectedTag);
   }
 
-  Map<int, List<Task>> get tasksForDays {
+  Map<DateTime, List<Task>> get tasksForDays {
     return this.sortTasksForDays(tagProxy(_tasks, _selectedTag));
   }
 }

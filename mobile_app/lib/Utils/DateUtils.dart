@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class DateUtils {
   DateUtils();
 
@@ -9,5 +11,10 @@ class DateUtils {
       return true;
     }
     return false;
+  }
+
+  static String prepareDateToString(DateTime date){
+    final format = DateFormat('dd/mm');
+    return format.format(date);
   }
 }
