@@ -48,7 +48,7 @@ class App extends StatelessWidget {
           InboxTab.routeName: (context) => InboxTab(),
           AnyTimeTab.routeName: (context) => AnyTimeTab(),
           SomeTimeTab.routeName: (context) => SomeTimeTab(),
-          '/task': (context) => TaskPage(),
+          AddTaskPage.routeName: (context) => AddTaskPage(),
           EditTaskPage.routeName : (context) => EditTaskPage()
         },
       ),

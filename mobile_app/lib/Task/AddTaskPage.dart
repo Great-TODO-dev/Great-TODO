@@ -9,18 +9,18 @@ import '../Stores/Tasks.dart';
 import '../widgets/TagListTask.dart';
 import './DateTimePickers.dart';
 
-class TaskPage extends StatefulWidget {
-  _TaskPageState createState() => _TaskPageState();
+class AddTaskPage extends StatefulWidget {
+  static const routeName = "/addTaskPage";
+
+  _AddTaskPageState createState() => _AddTaskPageState();
 }
 
-class _TaskPageState extends State<TaskPage> {
+class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController taskName = TextEditingController();
   final TextEditingController taskDescription = TextEditingController();
   Task _task = new Task();
 
   bool _needToShowStoreChange = false;
-
-  _TaskPageState();
 
   void _validateTask() {
     String name = taskName.text;
