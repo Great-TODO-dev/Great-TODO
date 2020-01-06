@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../Locals/locals.dart';
 
-import '../Tabs/InboxTab/InboxTab.dart';
 import '../Tabs/TodayTab/TodayTab.dart';
 import '../Tabs/SomeTimeTab/SomeTimeTab.dart';
 import '../Tabs/AnyTimeTab/AnyTimeTab.dart';
+import '../Tabs/Upcoming/Upcoming.dart';
 
 class Section extends StatelessWidget {
   final String name;
@@ -26,6 +26,9 @@ class Section extends StatelessWidget {
             break;
           case Locals.someTime:
             Navigator.pushNamed(context, SomeTimeTab.routeName);
+            break;
+          case Locals.upComing:
+            Navigator.pushNamed(context, Upcoming.routeName);
             break;
           default:
         }

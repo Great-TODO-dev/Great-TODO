@@ -6,10 +6,11 @@ import '../Stores/Tasks.dart';
 import '../Stores/Task.dart';
 import '../widgets/common/TagsList.dart';
 import '../Task/TaskLabel.dart';
+import '../Task/AddTaskPage.dart';
 
 abstract class BaseTab extends StatelessWidget {
   void _moveToAddNewTaskPage(BuildContext context) {
-    Navigator.of(context).pushNamed('/task');
+    Navigator.of(context).pushNamed(AddTaskPage.routeName);
   }
 
   Widget title() {}

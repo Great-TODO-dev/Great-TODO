@@ -9,6 +9,7 @@ import './Tabs/InboxTab/InboxTab.dart';
 import './Tabs/TodayTab/TodayTab.dart';
 import './Tabs/SomeTimeTab/SomeTimeTab.dart';
 import './Tabs/AnyTimeTab/AnyTimeTab.dart';
+import './Tabs/Upcoming/Upcoming.dart';
 
 import './HomePage/HomePage.dart';
 import './Task/AddTaskPage.dart';
@@ -49,7 +50,8 @@ class App extends StatelessWidget {
           AnyTimeTab.routeName: (context) => AnyTimeTab(),
           SomeTimeTab.routeName: (context) => SomeTimeTab(),
           AddTaskPage.routeName: (context) => AddTaskPage(),
-          EditTaskPage.routeName : (context) => EditTaskPage()
+          EditTaskPage.routeName : (context) => EditTaskPage(),
+          Upcoming.routeName : (context) => Upcoming()
         },
       ),
     );
