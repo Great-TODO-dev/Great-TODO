@@ -43,14 +43,25 @@ class Repository {
   static Future<void> updateTask(Task task) async {
     final db = await Repository.getInstance();
     String tagsString = jsonEncode(task.tags);
-    db.update(TASKSTABLENAME, {
-      'name': task.name,
-      'description': task.description,
-      'tags': tagsString,
-      'date': task.date == null ? 'null' : task.date.toIso8601String(),
-      'deadline':
-          task.deadline == null ? 'null' : task.deadline.toIso8601String(),
-      'store': task.storeToString()
-    }, where: "id = ${task.id}");
+    db.update(
+        TASKSTABLENAME,
+        {
+          'name': task.name,
+          'description': task.description,
+          'tags': tagsString,
+          'date': task.date == null ? 'null' : task.date.toIso8601String(),
+          'deadline':
+              task.deadline == null ? 'null' : task.deadline.toIso8601String(),
+          'store': task.storeToString()
+        },
+        where: "id = ${task.id}");
+  }
+
+  static Future<void> removeTask(int id) async {
+    final db = await Repository.getInstance();
+    db.delete(
+      TASKSTABLENAME,
+      where: "id = $id",
+    );
   }
 }

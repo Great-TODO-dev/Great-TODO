@@ -87,6 +87,7 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
 
   void removeSingleTask(int id) {
     _tasks.removeWhere((task) => task.id == id);
+    Repository.removeTask(id);
     resetSelectedTag();
     notifyListeners();
   }

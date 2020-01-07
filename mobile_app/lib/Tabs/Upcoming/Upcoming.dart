@@ -6,6 +6,7 @@ import './UpcomingTitle.dart';
 import '../../widgets/common/TagsList.dart';
 import '../../Task/TaskLabel.dart';
 import './TasksSection.dart';
+import '../Placeholder.dart';
 
 import '../../Stores/Tasks.dart';
 import '../../Stores/Task.dart';
@@ -20,6 +21,8 @@ class Upcoming extends StatefulWidget {
 
 class _UpcomingState extends State<Upcoming> {
 
+  final _countWidgetsWithoutTasks = 2;
+
   @override
   Widget build(BuildContext context) {
     final tasks = Provider.of<Tasks>(context).tasksForDays;
@@ -31,13 +34,15 @@ class _UpcomingState extends State<Upcoming> {
         transitionBetweenRoutes: true,
       ),
       child: ListView.builder(
-        itemCount: tasks.length + 2,
-        // itemCount: 3,
+        itemCount: tasks.length == 0 ? _countWidgetsWithoutTasks : tasks.length + 2,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return UpcomingTitle();
           }
           if (index == 1) {
+            if (tasks.length == 0) {
+              return Placehodler();
+            }
             return Column(
               children: [
                 TagList(),

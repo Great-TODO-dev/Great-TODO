@@ -7,8 +7,12 @@ import '../Stores/Task.dart';
 import '../widgets/common/TagsList.dart';
 import '../Task/TaskLabel.dart';
 import '../Task/AddTaskPage.dart';
+import './Placeholder.dart';
 
 abstract class BaseTab extends StatelessWidget {
+
+  final _countWidgetsWithoutTasks = 2;
+
   void _moveToAddNewTaskPage(BuildContext context) {
     Navigator.of(context).pushNamed(AddTaskPage.routeName);
   }
@@ -34,12 +38,15 @@ abstract class BaseTab extends StatelessWidget {
         ),
       ),
       child: ListView.builder(
-        itemCount: tasks.length + 2,
+        itemCount: tasks.length == 0 ? _countWidgetsWithoutTasks : tasks.length + 2,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return title();
           }
           if (index == 1) {
+            if (tasks.length == 0) {
+              return Placehodler();
+            }
             return Column(
               children: [
                 TagList(),
@@ -49,12 +56,10 @@ abstract class BaseTab extends StatelessWidget {
               ],
             );
           }
-          return tasks.length != 0
-              ? ChangeNotifierProvider.value(
+          return ChangeNotifierProvider.value(
                   value: tasks[index - 2],
                   child: TaskLabel(),
-                )
-              : Container();
+                );
         },
       ),
     );

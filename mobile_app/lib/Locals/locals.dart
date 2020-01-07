@@ -11,5 +11,6 @@ class Locals {
   static const daysLeft = 'days left';
   static const alotOfDaysLeft = 'Too much days left';
   static const moveTaskToStore = 'Move task to store:';
+  static const noTasks = "There is nothing to do. \n You have no tasks. \n Stay frosty";
   const Locals();
 }
