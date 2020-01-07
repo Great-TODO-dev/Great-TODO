@@ -15,8 +15,9 @@ class Section extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return FlatButton(
+      padding: EdgeInsets.all(0),
+      onPressed: () {
         switch (name) {
           case Locals.today:
             Navigator.pushNamed(context, TodayTab.routeName);
