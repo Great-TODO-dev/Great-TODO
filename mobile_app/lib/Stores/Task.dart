@@ -88,15 +88,17 @@ class Task with ChangeNotifier {
 
   void clearDate() => _date = null;
 
-  void addTag(tag) {
+  void addTag(String tag) {
     if (!_tags.contains(tag)) {
       _tags.add(tag);
       notifyListeners();
     }
   }
 
-  void removeTag(tag) {
-    if (_tags.length != 0) {}
+  void removeTag(tagToRemove) {
+    if (_tags.length != 0) {
+      _tags.removeWhere((tag) => tag == tagToRemove);
+    }
   }
 
   void changeDoneState() {

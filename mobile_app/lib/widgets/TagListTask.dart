@@ -14,9 +14,12 @@ class TagListTask extends StatefulWidget {
 }
 
 class _TagListTaskState extends State<TagListTask> {
-
-  bool _isSelectedTag(int id){
+  bool _isSelectedTag(int id) {
     return false;
+  }
+
+  void _deleteTag(tag) {
+    Provider.of<Task>(context, listen: false).removeTag(tag);
   }
 
   @override
@@ -25,44 +28,58 @@ class _TagListTaskState extends State<TagListTask> {
 
     if (Provider.of<Task>(context, listen: false).id == null) {
       tags = Provider.of<Tasks>(context).allTags;
-    }
-    else{
+    } else {
       tags = Provider.of<Task>(context).tags;
     }
-    
+
     return SizedBox(
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: tags.length + 1,
         itemBuilder: (BuildContext context, int i) {
-          return i == tags.length ? AddTagButton() : GestureDetector(
-            behavior: HitTestBehavior.deferToChild,
-            onTap: () => {},
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              constraints: BoxConstraints(minWidth: 70, maxWidth: 180),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  border: Border.all(
-                      width: 2,
-                      color: _isSelectedTag(i)
-                          ? Colors.blue
-                          : Color.fromRGBO(196, 196, 196, 1))),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      tags[i],
-                      style: TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ]),
-            ),
-          );
+          return i == tags.length
+              ? AddTagButton()
+              : GestureDetector(
+                  behavior: HitTestBehavior.deferToChild,
+                  onTap: () => {},
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20, right: 15),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    constraints: BoxConstraints(minWidth: 70, maxWidth: 180),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        border: Border.all(
+                            width: 2,
+                            color: _isSelectedTag(i)
+                                ? Colors.blue
+                                : Color.fromRGBO(196, 196, 196, 1))),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FittedBox(
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  tags[i],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(width: 5,),
+                                GestureDetector(
+                                  onTap: () => setState(() => _deleteTag(tags[i])),
+                                    child:
+                                      Icon(Icons.close, size: 20,)
+                                )
+                              ],
+                            ),
+                          )
+                        ]),
+                  ),
+                );
         },
       ),
     );
