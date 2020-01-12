@@ -6,14 +6,17 @@ import 'package:provider/provider.dart';
 import '../Stores/Task.dart';
 
 import './EditTaskPage.dart';
+import '../widgets/Checkbox.dart' as wg;
 
 class TaskLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final task = Provider.of<Task>(context);
     return FlatButton(
+      padding: EdgeInsets.all(0),
       onPressed: () {
-        Navigator.of(context).pushNamed(EditTaskPage.routeName, arguments: task);
+        Navigator.of(context)
+            .pushNamed(EditTaskPage.routeName, arguments: task);
       },
       child: Container(
         padding: EdgeInsets.only(right: 15),
@@ -22,20 +25,14 @@ class TaskLabel extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  Material(
-                    color: Colors.black,
-                    child: Container(
-                      child: FittedBox(
-                        fit: BoxFit.cover,
-                        child: Checkbox(
-                          value: task.doneState,
-                          onChanged: (_) {
-                            task.changeDoneState();
-                          },
-                          activeColor: Colors.blue,
-                        ),
-                      ),
-                    ),
+                  wg.Checkbox(
+                    checked: task.doneState,
+                    onChanged: (_) {
+                      task.changeDoneState();
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
                   ),
                   Text(
                     task.name,

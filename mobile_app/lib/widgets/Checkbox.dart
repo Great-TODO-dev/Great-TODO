@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 
 class Checkbox extends StatefulWidget {
-  Checkbox();
+  Function onChanged;
+  bool checked;
+
+  Checkbox({
+    @required
+    this.onChanged,
+    @required
+    this.checked,
+  });
 
   _CheckboxState createState() => _CheckboxState();
 }
 
 class _CheckboxState extends State<Checkbox> {
-
-  bool _doneState = false;
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 20),
-      child: SizedBox(
-        height: 40,
-        width: 40,
-        child: Stack(alignment: AlignmentDirectional.center, children: [
-          SizedBox(
-            height: 40,
-            width: 40,
-            child: CustomPaint(
-              painter: CheckboxArea(),
+    assert(widget.checked != null);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        print(constraints.widthConstraints().maxHeight);
+        return GestureDetector(
+          onTap: () => setState(() => widget.onChanged(widget.checked)),
+          child: Container(
+            margin: EdgeInsets.only(left: 20),
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CustomPaint(
+                  painter: CheckboxArea(),
+                  child: widget.checked
+                      ? CustomPaint(
+                          painter: CheckMark(),
+                        )
+                      : Container()),
             ),
           ),
-          SizedBox(
-            width: 40,
-            height: 40,
-            child: CustomPaint(
-              painter: CheckMark(),
-            ),
-          )
-        ]),
-      ),
+        );
+      },
     );
   }
 }
@@ -48,9 +53,8 @@ class CheckboxArea extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
     paint.color = Color.fromRGBO(59, 59, 59, 1);
-    // paint.color = Colors.red;
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 5;
+    paint.strokeWidth = 3;
     canvas.drawRRect(
         RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -66,12 +70,13 @@ class CheckMark extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
-    // paint.color = Color.fromRGBO(59, 59, 59, 1);
     paint.color = Colors.blue;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 3;
-    canvas.drawLine(Offset(0, size.height / 4), Offset(size.width / 3, size.height / 1.5), paint);
-    canvas.drawLine(Offset(size.width, 0), Offset(size.width / 3, size.height / 1.5), paint);
+    canvas.drawLine(Offset(0, size.height / 4),
+        Offset(size.width / 3, size.height / 1.5), paint);
+    canvas.drawLine(Offset(size.width, 0),
+        Offset(size.width / 3, size.height / 1.5), paint);
   }
 
   @override
