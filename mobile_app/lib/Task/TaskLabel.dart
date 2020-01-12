@@ -13,40 +13,52 @@ class TaskLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final task = Provider.of<Task>(context);
     return FlatButton(
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.only(right: 15),
       onPressed: () {
         Navigator.of(context)
             .pushNamed(EditTaskPage.routeName, arguments: task);
       },
-      child: Container(
-        padding: EdgeInsets.only(right: 15),
-        child: Row(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  wg.Checkbox(
-                    checked: task.doneState,
-                    onChanged: (_) {
-                      task.changeDoneState();
-                    },
+      child: SizedBox(
+        width: double.infinity,
+        child: LayoutBuilder(
+          builder: (ctx, constraints) {
+            print(constraints.maxWidth);
+            return Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      wg.Checkbox(
+                        checked: task.doneState,
+                        onChanged: (_) {
+                          task.changeDoneState();
+                        },
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8),
+                        child: Text(
+                          task.name,
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: task.doneState
+                                  ? Color.fromRGBO(102, 102, 102, 1)
+                                  : Colors.white),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    task.name,
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                    overflow: TextOverflow.clip,
-                  ),
-                ],
-              ),
-            ),
-            Icon(
-              Icons.all_inclusive,
-              color: Colors.white,
-            )
-          ],
+                ),
+                Icon(
+                  Icons.all_inclusive,
+                  color: Colors.white,
+                )
+              ],
+            );
+          },
         ),
       ),
     );

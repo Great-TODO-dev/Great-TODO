@@ -20,7 +20,6 @@ class _CheckboxState extends State<Checkbox> {
     assert(widget.checked != null);
     return LayoutBuilder(
       builder: (context, constraints) {
-        print(constraints.widthConstraints().maxHeight);
         return GestureDetector(
           onTap: () => setState(() => widget.onChanged(widget.checked)),
           child: Container(
