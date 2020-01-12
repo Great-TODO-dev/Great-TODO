@@ -26,7 +26,6 @@ mixin TasksPreparer {
     tasks.forEach((task) {
       if (task.date != null) {
         final formatDate = format.parse("${task.date.year} ${task.date.month} ${task.date.day}");
-        print(formatDate);
         result.containsKey(formatDate) ? result[formatDate] += [task] : result[formatDate] = [task];
       }
       if (task.deadline != null) {

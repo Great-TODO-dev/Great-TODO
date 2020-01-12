@@ -9,7 +9,6 @@ import './TasksSection.dart';
 import '../Placeholder.dart';
 
 import '../../Stores/Tasks.dart';
-import '../../Stores/Task.dart';
 
 class Upcoming extends StatefulWidget {
   static const routeName = "/upcoming";
@@ -23,10 +22,15 @@ class _UpcomingState extends State<Upcoming> {
 
   final _countWidgetsWithoutTasks = 2;
 
+  List<DateTime> _sortDates(List<DateTime> dates) {
+    dates.sort((a, b) => a.compareTo(b));
+    return dates;
+  }
+
   @override
   Widget build(BuildContext context) {
     final tasks = Provider.of<Tasks>(context).tasksForDays;
-    print(tasks);
+    List<DateTime> dates = _sortDates(tasks.keys.toList());
     return CupertinoPageScaffold(
       backgroundColor: Colors.black,
       navigationBar: CupertinoNavigationBar(
@@ -52,7 +56,7 @@ class _UpcomingState extends State<Upcoming> {
               ],
             );
           }
-          return TasksSection(tasks.keys.toList()[index - 2], tasks[tasks.keys.toList()[index - 2]]);
+          return TasksSection(dates[index - 2], tasks[dates[index - 2]]);
         },
       ),
     );
