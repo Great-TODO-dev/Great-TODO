@@ -37,6 +37,7 @@ class Task with ChangeNotifier {
       {id,
       name = '',
       description = '',
+      doneState = false,
       List<String> tags = const [],
       date,
       deadLine,
@@ -48,7 +49,7 @@ class Task with ChangeNotifier {
     this._date = date;
     this._deadline = deadLine == null ? null : deadLine;
     this._store = store == null ? null : store;
-    _doneState = true;
+    this._doneState = doneState;
   }
 
   set name(name) => _name = name;

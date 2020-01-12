@@ -23,10 +23,9 @@ class _CheckboxState extends State<Checkbox> {
         return GestureDetector(
           onTap: () => setState(() => widget.onChanged(widget.checked)),
           child: Container(
-            margin: EdgeInsets.only(left: 20),
             child: SizedBox(
-              height: 20,
-              width: 20,
+              height: 25,
+              width: 25,
               child: CustomPaint(
                   painter: CheckboxArea(),
                   child: widget.checked

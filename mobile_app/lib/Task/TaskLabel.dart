@@ -13,7 +13,7 @@ class TaskLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final task = Provider.of<Task>(context);
     return FlatButton(
-      padding: EdgeInsets.only(right: 15),
+      padding: EdgeInsets.only(left: 10, right: 15),
       onPressed: () {
         Navigator.of(context)
             .pushNamed(EditTaskPage.routeName, arguments: task);
@@ -22,7 +22,6 @@ class TaskLabel extends StatelessWidget {
         width: double.infinity,
         child: LayoutBuilder(
           builder: (ctx, constraints) {
-            print(constraints.maxWidth);
             return Row(
               children: [
                 Row(
@@ -34,7 +33,7 @@ class TaskLabel extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                       Container(
                         constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8, minWidth: constraints.maxWidth * 0.8),

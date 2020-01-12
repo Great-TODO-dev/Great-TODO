@@ -9,12 +9,12 @@ class Repository {
   static const DBNAME = "GREAT-TODO.db";
   static const TASKSTABLENAME = "tasks";
   static const DBTABLEPARAMS =
-      '$TASKSTABLENAME(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, date TEXT, deadline TEXT, tags TEXT, store TEXT)';
+      '$TASKSTABLENAME(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, doneState TEXT, date TEXT, deadline TEXT, tags TEXT, store TEXT)';
 
   static Future<sql.Database> getInstance() async {
     final dbPath = await sql.getDatabasesPath();
     final db = await sql.openDatabase(path.join(dbPath, DBNAME), onOpen: (db) {
-      db.execute('CREATE TABLE IF NOT EXISTS $DBTABLEPARAMS');
+      return db.execute('CREATE TABLE IF NOT EXISTS $DBTABLEPARAMS');
     }, onCreate: (db, version) {
       return db.execute('CREATE TABLE $DBTABLEPARAMS');
     }, version: 1);
@@ -32,6 +32,7 @@ class Repository {
     db.insert(TASKSTABLENAME, {
       'name': task.name,
       'description': task.description,
+      'doneState': task.doneState.toString(),
       'tags': tagsString,
       'date': task.date == null ? 'null' : task.date.toIso8601String(),
       'deadline':
@@ -48,6 +49,7 @@ class Repository {
         {
           'name': task.name,
           'description': task.description,
+          'doneState': task.doneState.toString(),
           'tags': tagsString,
           'date': task.date == null ? 'null' : task.date.toIso8601String(),
           'deadline':
