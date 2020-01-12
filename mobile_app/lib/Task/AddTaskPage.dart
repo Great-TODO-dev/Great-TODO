@@ -135,7 +135,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     maxLines: null,
                     controller: taskDescription,
                     showCursor: true,
-                    style: TextStyle(color: Colors.white, fontSize: 30),
+                    style: TextStyle(color: Colors.white, fontSize: 25),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: Locals.description,

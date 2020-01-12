@@ -47,6 +47,9 @@ class TaskLabel extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      SizedBox(
+                        width: 10,
+                      ),
                     ],
                   ),
                 Icon(
