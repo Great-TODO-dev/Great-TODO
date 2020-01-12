@@ -25,8 +25,7 @@ class TaskLabel extends StatelessWidget {
             print(constraints.maxWidth);
             return Row(
               children: [
-                Expanded(
-                  child: Row(
+                Row(
                     children: [
                       wg.Checkbox(
                         checked: task.doneState,
@@ -38,7 +37,7 @@ class TaskLabel extends StatelessWidget {
                         width: 10,
                       ),
                       Container(
-                        constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8),
+                        constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8, minWidth: constraints.maxWidth * 0.8),
                         child: Text(
                           task.name,
                           style: TextStyle(
@@ -51,7 +50,6 @@ class TaskLabel extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
                 Icon(
                   Icons.all_inclusive,
                   color: Colors.white,
