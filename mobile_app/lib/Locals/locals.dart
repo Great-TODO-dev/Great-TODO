@@ -1,8 +1,8 @@
 class Locals {
   static const today = 'Today';
   static const upComing = 'Upcoming';
-  static const anyTime = 'AnyTime';
-  static const someTime = 'SomeTime';
+  static const anyTime = 'Anytime';
+  static const someTime = 'Sometime';
   static const inbox = 'Inbox';
   static const name = 'Name';
   static const description = 'Description';
