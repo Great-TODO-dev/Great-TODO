@@ -68,7 +68,7 @@ class DarkLine extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.color = Colors.black38;
+    paint.color = Color.fromRGBO(59, 59, 59, 1);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 2;
     canvas.drawLine(Offset.zero, Offset(size.width, 0), paint);

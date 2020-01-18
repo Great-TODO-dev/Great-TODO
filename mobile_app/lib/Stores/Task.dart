@@ -38,14 +38,14 @@ class Task with ChangeNotifier {
       name = '',
       description = '',
       doneState = false,
-      List<String> tags = const [],
+      List<String> tags,
       date,
       deadLine,
       store}) {
     this._id = id;
     this._name = name;
     this._description = description;
-    this._tags = tags;
+    this._tags = tags == null ? [] : tags;
     this._date = date;
     this._deadline = deadLine == null ? null : deadLine;
     this._store = store == null ? null : store;

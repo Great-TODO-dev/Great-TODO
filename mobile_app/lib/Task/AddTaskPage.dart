@@ -19,6 +19,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController taskName = TextEditingController();
   final TextEditingController taskDescription = TextEditingController();
   Task _task = new Task();
+  bool _taskSubmitted = false;
 
   bool _needToShowStoreChange = false;
 
@@ -28,6 +29,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     _task.name = name;
     _task.description = description;
     Provider.of<Tasks>(context, listen: false).addTask(_task);
+    _taskSubmitted = true;
     Navigator.pop(context);
   }
 
@@ -40,6 +42,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
   void dispose() {
     taskName.dispose();
     taskDescription.dispose();
+    if (!_taskSubmitted) {
+      _task.dispose();
+    }
     super.dispose();
   }
 

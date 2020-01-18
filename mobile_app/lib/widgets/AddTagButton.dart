@@ -10,18 +10,10 @@ class AddTagButton extends StatefulWidget {
 
 class _AddTagButtonState extends State<AddTagButton> {
   final TextEditingController _tag = TextEditingController();
-  Function _addNewTag;
-
-  @override
-  void initState() {
-    super.initState();
-    _addNewTag = Provider.of<Task>(context, listen: false).addTag;
-  }
 
   bool _isLabel = true;
-
   void _submitNewTag() {
-    _addNewTag(_tag.text);
+    Provider.of<Task>(context, listen: false).addTag(_tag.text);
     _isLabel = true;
   }
 
