@@ -47,14 +47,14 @@ class Section extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10.0),
                   child: Text(
                     name,
-                    style: TextStyle(fontSize: 30, color: Colors.white),
+                    style: TextStyle(fontSize: 26, color: Colors.white),
                   ),
                 )
               ],
             )),
             Text(
               count,
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 26),
             )
           ],
         ),

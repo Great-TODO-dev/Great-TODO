@@ -25,7 +25,7 @@ class TodayTitle extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10),
                   child: Text(
                     Locals.today,
-                    style: TextStyle(fontSize: 30, color: Colors.white),
+                    style: TextStyle(fontSize: 26, color: Colors.white),
                   ),
                 )
               ],

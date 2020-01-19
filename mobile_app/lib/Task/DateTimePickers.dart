@@ -99,7 +99,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
                     task.date == null
                         ? 'No date selected'
                         : DateFormat('MM/dd HH:mm').format(task.date),
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 ),
                 if (task.date != null)
@@ -137,7 +137,7 @@ class _DateTimePickersState extends State<DateTimePickers> {
                     task.deadline == null
                         ? 'No date selected'
                         : _prepareText(task.deadline),
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 ),
                 if (task.deadline != null)

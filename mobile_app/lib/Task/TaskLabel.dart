@@ -23,6 +23,7 @@ class TaskLabel extends StatelessWidget {
         width: double.infinity,
         child: LayoutBuilder(
           builder: (ctx, constraints) {
+            print(constraints.maxWidth);
             return Row(
               children: [
                 Row(
@@ -38,11 +39,11 @@ class TaskLabel extends StatelessWidget {
                         width: 15,
                       ),
                       Container(
-                        constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8, minWidth: constraints.maxWidth * 0.8),
+                        constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.75, minWidth: constraints.maxWidth * 0.75),
                         child: Text(
                           task.name,
                           style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 24,
                               color: task.doneState
                                   ? Color.fromRGBO(102, 102, 102, 1)
                                   : Colors.white),

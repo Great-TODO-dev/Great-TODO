@@ -57,7 +57,7 @@ class _TagListTaskState extends State<TagListTask> {
                                 Text(
                                   tags[i],
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                                      color: Colors.white, fontSize: 18),
                                   textAlign: TextAlign.center,
                                   overflow: TextOverflow.ellipsis,
                                 ),

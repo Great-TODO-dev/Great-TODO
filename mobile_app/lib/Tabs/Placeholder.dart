@@ -15,7 +15,7 @@ class Placehodler extends StatelessWidget {
           child: Text(
             Locals.noTasks,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 30),
+            style: TextStyle(color: Colors.white, fontSize: 24),
           ),
         ),
       ),
