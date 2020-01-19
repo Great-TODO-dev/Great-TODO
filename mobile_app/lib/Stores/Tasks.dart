@@ -107,7 +107,7 @@ class Tasks with ChangeNotifier, TasksPreparer, Repository {
               id: item['id'],
               name: item['name'],
               tags: json.decode(item['tags']).cast<String>(),
-              doneState: bool.fromEnvironment(item['doneState']),
+              doneState: (item['doneState'] as String).toLowerCase() == 'true' ? true : false,
               description: item['description'],
               date: item['date'] == 'null' ? null :  DateTime.parse(item['date']),
               deadLine: item['deadline'] == 'null' ? null : DateTime.parse(item['deadline']),

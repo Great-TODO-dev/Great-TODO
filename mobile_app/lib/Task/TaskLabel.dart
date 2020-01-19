@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../Stores/Task.dart';
+import '../Stores/Tasks.dart';
 
 import './EditTaskPage.dart';
 import '../widgets/Checkbox.dart' as wg;
@@ -30,6 +31,7 @@ class TaskLabel extends StatelessWidget {
                         checked: task.doneState,
                         onChanged: (_) {
                           task.changeDoneState();
+                          Provider.of<Tasks>(context).updateTask(task.id);
                         },
                       ),
                       SizedBox(
