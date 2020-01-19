@@ -13,6 +13,11 @@ class InboxTab extends BaseTab{
   static final routeName = '/inboxTab';
 
   @override
+  BaseTabState createState() => _InboxTabState();
+}
+
+class _InboxTabState extends BaseTabState {
+  @override
   Widget title() {
     return InboxTitle();
   }

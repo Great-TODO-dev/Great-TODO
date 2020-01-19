@@ -13,6 +13,11 @@ class SomeTimeTab extends BaseTab{
   static final routeName = '/someTimeTab';
 
   @override
+  BaseTabState createState() => _SomeTimeTabState();
+}
+
+class _SomeTimeTabState extends BaseTabState {
+  @override
   Widget title() {
     return SomeTimeTitle();
   }

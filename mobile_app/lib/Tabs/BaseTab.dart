@@ -9,8 +9,13 @@ import '../Task/TaskLabel.dart';
 import '../Task/AddTaskPage.dart';
 import './Placeholder.dart';
 
-abstract class BaseTab extends StatelessWidget {
+abstract class BaseTab extends StatefulWidget {
 
+  @override
+  BaseTabState createState();
+}
+
+abstract class BaseTabState extends State<BaseTab> {
   final _countWidgetsWithoutTasks = 2;
 
   void _moveToAddNewTaskPage(BuildContext context) {
@@ -18,6 +23,12 @@ abstract class BaseTab extends StatelessWidget {
   }
 
   Widget title() {}
+
+  @override
+  void deactivate() {
+    Provider.of<Tasks>(context).resetSelectedTag();
+    super.deactivate();
+  }
 
   List<Task> tasksProxy(Tasks tasks) {}
 

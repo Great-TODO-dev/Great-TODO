@@ -11,6 +11,12 @@ class TodayTab extends BaseTab {
   static final routeName = '/todayTab';
 
   @override
+  BaseTabState createState() => _TodayTabState();
+
+}
+
+class _TodayTabState extends BaseTabState {
+  @override
   Widget title() {
     return TodayTitle();
   }
