@@ -117,42 +117,44 @@ class _EditTaskPageState extends State<EditTaskPage> {
                 ],
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: taskName,
-                    showCursor: true,
-                    style: TextStyle(color: Colors.white, fontSize: 24),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: Locals.name,
-                      hintStyle:
-                          TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: taskName,
+                      showCursor: true,
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: Locals.name,
+                        hintStyle: TextStyle(
+                            color: Color.fromRGBO(230, 230, 230, 0.7)),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  TagListTask(),
-                  SizedBox(height: 20),
-                  DateTimePickers(),
-                  SizedBox(height: 20),
-                  TextField(
-                    onChanged: (_) {
-                      setState(() {});
-                    },
-                    maxLines: null,
-                    controller: taskDescription,
-                    showCursor: true,
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: Locals.description,
-                      hintStyle:
-                          TextStyle(color: Color.fromRGBO(230, 230, 230, 0.7)),
-                    ),
-                  )
-                ],
+                    SizedBox(height: 20),
+                    TagListTask(),
+                    SizedBox(height: 20),
+                    DateTimePickers(),
+                    SizedBox(height: 20),
+                    TextField(
+                      onChanged: (_) {
+                        setState(() {});
+                      },
+                      maxLines: null,
+                      controller: taskDescription,
+                      showCursor: true,
+                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: Locals.description,
+                        hintStyle: TextStyle(
+                            color: Color.fromRGBO(230, 230, 230, 0.7)),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )),
         if (_needToShowStoreChange)
